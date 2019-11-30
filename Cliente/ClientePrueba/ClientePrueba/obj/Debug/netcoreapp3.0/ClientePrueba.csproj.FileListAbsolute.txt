@@ -1,0 +1,11 @@
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.exe
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.deps.json
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.runtimeconfig.json
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.runtimeconfig.dev.json
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.dll
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\bin\Debug\netcoreapp3.0\ClientePrueba.pdb
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\obj\Debug\netcoreapp3.0\ClientePrueba.AssemblyInfoInputs.cache
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\obj\Debug\netcoreapp3.0\ClientePrueba.AssemblyInfo.cs
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\obj\Debug\netcoreapp3.0\ClientePrueba.dll
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\obj\Debug\netcoreapp3.0\ClientePrueba.pdb
+C:\Users\MAXSIO-2\source\repos\ClientePrueba\ClientePrueba\obj\Debug\netcoreapp3.0\ClientePrueba.csprojAssemblyReference.cache
