@@ -24,6 +24,8 @@ namespace ClientePrueba
                 {
                     c.send(msg);
                     c.receive();
+                    if(msg.Equals("down"))
+                        c.receive2();
                 }
                 
             }

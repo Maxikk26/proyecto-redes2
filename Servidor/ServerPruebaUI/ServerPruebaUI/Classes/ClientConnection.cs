@@ -14,25 +14,25 @@ namespace Classes
     class ClientConnection
     {
         private TcpClient _controlClient;
-
         private NetworkStream _controlStream;
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
 
-        private string _currentDirectory = @"c:\files";
+        private string _currentDirectory = @"C:\server";
 
         private string _username;
 
         private Server target;
+        private FileManager manager;
 
         public ClientConnection(TcpClient client, Server f1)
         {
             target = f1;
             _controlClient = client;
             _controlStream = _controlClient.GetStream();
-
             _controlReader = new StreamReader(_controlStream);
             _controlWriter = new StreamWriter(_controlStream);
+            manager = new FileManager();
         }
 
         public void HandleClient(Object obj)
@@ -80,6 +80,11 @@ namespace Classes
                             case "LIST":
                                 response = List(arguments);
                                 break;
+                            case "DOWN":
+                                Console.WriteLine("Entro");
+                                Download(arguments);
+                                response = "221";
+                                break;
                             default:
                                 response = "502 Command not implemented";
                                 break;
@@ -101,6 +106,10 @@ namespace Classes
                         }
                     }
                 }
+            }catch(FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
             }
             catch (Exception ex)
             {
@@ -152,6 +161,13 @@ namespace Classes
             target.putText("User Disconnected...");
             target.takeCount(false);
             _controlClient.Close();
+        }
+
+        private void Download(string file)
+        {
+            Console.WriteLine("Funcion Download");
+            manager.Download(_controlClient,file);
+            Console.WriteLine("termino FileManager");
         }
 
         #endregion

@@ -8,21 +8,17 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\MAXSIO-2\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\MAXSIO-2\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MAXSIO-2\\source\\repos\\ClientePrueba\\ClientePrueba\\ClientePrueba.csproj",
+      "projectUniqueName": "C:\\Users\\MAXSIO-2\\Documents\\00Maxi\\Repositorios\\proyecto-redes2\\Cliente\\ClientePrueba\\ClientePrueba\\ClientePrueba.csproj",
       "projectName": "ClientePrueba",
-      "projectPath": "C:\\Users\\MAXSIO-2\\source\\repos\\ClientePrueba\\ClientePrueba\\ClientePrueba.csproj",
+      "projectPath": "C:\\Users\\MAXSIO-2\\Documents\\00Maxi\\Repositorios\\proyecto-redes2\\Cliente\\ClientePrueba\\ClientePrueba\\ClientePrueba.csproj",
       "packagesPath": "C:\\Users\\MAXSIO-2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MAXSIO-2\\source\\repos\\ClientePrueba\\ClientePrueba\\obj\\",
+      "outputPath": "C:\\Users\\MAXSIO-2\\Documents\\00Maxi\\Repositorios\\proyecto-redes2\\Cliente\\ClientePrueba\\ClientePrueba\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\MAXSIO-2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

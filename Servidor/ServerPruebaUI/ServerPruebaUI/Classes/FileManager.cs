@@ -5,39 +5,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ServerUI;
+using System.Net.Sockets;
 
 namespace Classes
 {
     class FileManager
     {
-        private string path = @"C:\server";
-        private Server target;
+        private string path = @"C:\server\";
 
-        public FileManager(Server f1)
+        public FileManager()
         {
-            target = f1;
-            rootDirectory();
         }
 
-        public void rootDirectory()
+        public bool rootDirectory()
         {
             try
             {
                 if (Directory.Exists(path))
                 {
-                    target.putText(path + " exists!");
+                    return true;
                 }
                 else
                 {
                     DirectoryInfo di = Directory.CreateDirectory(path);
-                    target.putText(path + " created!");
+                    return false;
                 }
             } 
             catch(Exception e)
             {
-                target.showError(e.Message,"Exception");
+                throw e;
             }
             
+        }
+
+        public void Download(TcpClient client, string file)
+        {
+            Console.WriteLine(path+file);
+            if (File.Exists(path+file))
+            {
+                client.Client.SendFile(path+file);
+            }
         }
 
         

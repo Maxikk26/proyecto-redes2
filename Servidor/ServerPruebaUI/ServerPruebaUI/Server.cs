@@ -17,6 +17,8 @@ namespace ServerUI
         private int count= 0;
         private Classes.FtpServer ftp;
         private Classes.FileManager file;
+
+        private string path = @"C:\server";
         
         public Server()
         {
@@ -39,7 +41,12 @@ namespace ServerUI
                 button1.Enabled = false;
                 btnStop.Enabled = true;
                 putText("Starting server on port "+port);
-                file = new Classes.FileManager(this);
+                file = new Classes.FileManager();
+                bool directory = file.rootDirectory();
+                if (directory)
+                    putText(path + " exists!");
+                else
+                    putText(path + " created!");
 
             }
             catch (FormatException Ex)
@@ -55,6 +62,10 @@ namespace ServerUI
                 button1.Enabled = true;
                 btnStop.Enabled = false;
 
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
