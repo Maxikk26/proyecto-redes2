@@ -38,12 +38,26 @@ namespace Classes
             
         }
 
-        public void Download(TcpClient client, string file)
+        public void Download(StreamWriter writer, string file)
         {
+
             Console.WriteLine(path+file);
             if (File.Exists(path+file))
             {
-                client.Client.SendFile(path+file);
+                writer.WriteLine("FILENAME");
+                writer.Flush();
+                writer.WriteLine(file);
+                writer.Flush();
+                using (StreamReader sr = File.OpenText(path+file))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                        writer.WriteLine(s);
+                        writer.Flush();
+                    }
+                }
             }
         }
 

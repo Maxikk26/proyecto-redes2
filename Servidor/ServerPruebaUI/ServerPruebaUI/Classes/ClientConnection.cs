@@ -81,7 +81,6 @@ namespace Classes
                                 response = List(arguments);
                                 break;
                             case "DOWN":
-                                Console.WriteLine("Entro");
                                 Download(arguments);
                                 response = "221";
                                 break;
@@ -165,9 +164,7 @@ namespace Classes
 
         private void Download(string file)
         {
-            Console.WriteLine("Funcion Download");
-            manager.Download(_controlClient,file);
-            Console.WriteLine("termino FileManager");
+            manager.Download(_controlWriter,file);
         }
 
         #endregion

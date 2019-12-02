@@ -17,7 +17,9 @@ namespace ClientePrueba
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
 
+
         private string path = @"C:\pruebas";
+        private string fullPath;
         private int BytesPerRead = 1024;
 
         public FtpClient(TcpClient c)
@@ -53,13 +55,25 @@ namespace ClientePrueba
 
         public void receive2()
         {
-            using (var output = File.Create(path + @"\Data"))
+            String line;
+            if (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
             {
-                var buffer = new byte[BytesPerRead];
-                int bytesRead;
-                while ((bytesRead = _controlStream.Read(buffer, 0, buffer.Length)) > 0)
+                if (line.Equals("FILENAME"))
                 {
-                    output.Write(buffer, 0, bytesRead);
+                    line = _controlReader.ReadLine();
+                    fullPath = path + @"\" + line;
+                    if (File.Exists(fullPath))
+                        File.Delete(fullPath);
+                }
+                string s = "";
+                while ((s = _controlReader.ReadLine()) != null)
+                {
+                    if (s.Equals("221"))
+                        break;
+                    File.AppendAllText(fullPath, s);
+                    File.AppendAllText(fullPath, "\n");
+
+                    Console.WriteLine(s);
                 }
             }
         }

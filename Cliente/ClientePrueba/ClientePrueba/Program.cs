@@ -15,7 +15,7 @@ namespace ClientePrueba
             {
                 Console.Write("Enter Command: ");
                 msg = Console.ReadLine();
-                if (msg.Equals("quit"))
+                if (msg.Equals("CLOSE"))
                 {
                     c.close();
                     Environment.Exit(0);
@@ -23,9 +23,7 @@ namespace ClientePrueba
                 else
                 {
                     c.send(msg);
-                    c.receive();
-                    if(msg.Equals("down"))
-                        c.receive2();
+                    c.receive2();
                 }
                 
             }
