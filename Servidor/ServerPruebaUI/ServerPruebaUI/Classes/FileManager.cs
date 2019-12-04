@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.IO;
 using ServerUI;
 using System.Net.Sockets;
+using System.Drawing;
+using System.Net;
 
 namespace Classes
 {
     class FileManager
     {
         private string path = @"C:\server\";
+        private string fullPath;
 
         public FileManager()
         {
@@ -38,27 +41,50 @@ namespace Classes
             
         }
 
-        public void Download(StreamWriter writer, string file)
+        public void DownloadTxt(StreamWriter writer, string file)
         {
-
-            Console.WriteLine(path+file);
-            if (File.Exists(path+file))
+            fullPath = path + @"\" + file;
+            if (File.Exists(fullPath))
             {
                 writer.WriteLine("FILENAME");
                 writer.Flush();
                 writer.WriteLine(file);
                 writer.Flush();
-                using (StreamReader sr = File.OpenText(path+file))
+                using (StreamReader sr = File.OpenText(fullPath))
                 {
                     string s = "";
                     while ((s = sr.ReadLine()) != null)
                     {
-                        Console.WriteLine(s);
                         writer.WriteLine(s);
                         writer.Flush();
                     }
                 }
             }
+        }
+
+        public void DownloadImage(Socket socket, string file,StreamWriter writer)
+        {
+            fullPath = path + file;
+            byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
+
+            byte[] fileData = File.ReadAllBytes(fullPath);
+
+            int reversed = IPAddress.HostToNetworkOrder(fileData.Length);
+            
+            byte[] bytesToSend = BitConverter.GetBytes(reversed);
+
+            byte[] clientData = new byte[4 + fileNameByte.Length + fileData.Length];
+            byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
+
+            fileNameLen.CopyTo(clientData, 0);
+            fileNameByte.CopyTo(clientData, 4);
+            fileData.CopyTo(clientData, 4 + fileNameByte.Length);
+            double clientDataLen = clientData.Length;
+            Console.WriteLine(clientDataLen);
+            writer.Write(clientDataLen.ToString());
+            writer.Flush();
+            socket.Send(clientData);
+
         }
 
         

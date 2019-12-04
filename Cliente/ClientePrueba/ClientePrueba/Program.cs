@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Drawing;
 
 namespace ClientePrueba
 {
@@ -23,7 +24,7 @@ namespace ClientePrueba
                 else
                 {
                     c.send(msg);
-                    c.receive2();
+                    c.receive2(msg);
                 }
                 
             }

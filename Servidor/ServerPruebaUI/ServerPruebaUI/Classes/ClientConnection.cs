@@ -17,8 +17,9 @@ namespace Classes
         private NetworkStream _controlStream;
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
+        private Socket socket;
 
-        private string _currentDirectory = @"C:\server";
+        private string _currentDirectory = @"C:\server\";
 
         private string _username;
 
@@ -29,6 +30,7 @@ namespace Classes
         {
             target = f1;
             _controlClient = client;
+            socket = _controlClient.Client;
             _controlStream = _controlClient.GetStream();
             _controlReader = new StreamReader(_controlStream);
             _controlWriter = new StreamWriter(_controlStream);
@@ -164,7 +166,7 @@ namespace Classes
 
         private void Download(string file)
         {
-            manager.Download(_controlWriter,file);
+           manager.DownloadImage(socket, file,_controlWriter);
         }
 
         #endregion
