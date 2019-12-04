@@ -69,21 +69,14 @@ namespace Classes
 
             byte[] fileData = File.ReadAllBytes(fullPath);
 
-            int reversed = IPAddress.HostToNetworkOrder(fileData.Length);
-            
-            byte[] bytesToSend = BitConverter.GetBytes(reversed);
-
             byte[] clientData = new byte[4 + fileNameByte.Length + fileData.Length];
             byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
 
             fileNameLen.CopyTo(clientData, 0);
             fileNameByte.CopyTo(clientData, 4);
             fileData.CopyTo(clientData, 4 + fileNameByte.Length);
-            double clientDataLen = clientData.Length;
-            Console.WriteLine(clientDataLen);
-            writer.Write(clientDataLen.ToString());
-            writer.Flush();
             socket.Send(clientData);
+            socket.Close();
 
         }
 

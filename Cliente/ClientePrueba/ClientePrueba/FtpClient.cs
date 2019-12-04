@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 
 namespace ClientePrueba
 {
@@ -79,23 +80,27 @@ namespace ClientePrueba
             {
                 byte[] clientData = new byte[1024*5000];
 
-                var streamReader = new MemoryStream();
+                /*var streamReader = new MemoryStream();
                 _controlReader.BaseStream.CopyTo(streamReader);
-                clientData = streamReader.ToArray();
+                clientData = streamReader.ToArray();*/
 
-                int receivedBytesLen = socket.Receive(clientData);
-                Console.WriteLine("tamano socket "+receivedBytesLen);
+                byte[] buffer = new byte[1024];
+                string message = "";
+                int bytesReceived = 0;
+                do
+                {
+                    bytesReceived += socket.Receive(buffer);
+                    clientData.Concat(buffer).ToArray();
+
+                } while (bytesReceived > 0);
+                Console.WriteLine(message);
+               
 
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
-                Console.WriteLine("nombre archivo "+fileName);
                 BinaryWriter bWrite = new BinaryWriter(File.Open(path +@"\"+ fileName, FileMode.Append));
-                Console.WriteLine("archivo nuevo es "+bWrite);
-                bWrite.Write(clientData, 4 + fileNameLen, receivedBytesLen - 4 - fileNameLen);
+                bWrite.Write(clientData, 4 + fileNameLen, bytesReceived - 4 - fileNameLen);
                 bWrite.Close();
-
-                
-
 
             }
 
