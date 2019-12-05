@@ -68,7 +68,10 @@ namespace Classes
             byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
 
             byte[] fileData = File.ReadAllBytes(fullPath);
-
+            int x = 4 + fileNameByte.Length + fileData.Length;
+            Console.WriteLine("longitud "+x.ToString());
+            writer.Write(x.ToString());
+            writer.Flush();
             byte[] clientData = new byte[4 + fileNameByte.Length + fileData.Length];
             byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
 

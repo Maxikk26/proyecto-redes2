@@ -80,9 +80,14 @@ namespace ClientePrueba
             {
                 byte[] clientData = new byte[1024*5000];
 
-                /*var streamReader = new MemoryStream();
+                String line;
+                if (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
+                {
+                    Console.WriteLine("longitud: "+line);
+                }
+                var streamReader = new MemoryStream();
                 _controlReader.BaseStream.CopyTo(streamReader);
-                clientData = streamReader.ToArray();*/
+                clientData = streamReader.ToArray();
 
                 byte[] buffer = new byte[1024];
                 string message = "";
@@ -93,12 +98,12 @@ namespace ClientePrueba
                     clientData.Concat(buffer).ToArray();
 
                 } while (bytesReceived > 0);
-                Console.WriteLine(message);
+                //Console.WriteLine(message);
                
 
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
-                BinaryWriter bWrite = new BinaryWriter(File.Open(path +@"\"+ fileName, FileMode.Append));
+                BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path +@"\"+ fileName));
                 bWrite.Write(clientData, 4 + fileNameLen, bytesReceived - 4 - fileNameLen);
                 bWrite.Close();
 
