@@ -76,30 +76,15 @@ namespace ClientePrueba
                     }
                 }
             }*/
-            if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip"))
+            if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip")||msg.Contains(".jpg"))
             {
-                byte[] clientData = new byte[1024*5000];
-
-                String line;
-                if (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
-                {
-                    Console.WriteLine("longitud: "+line);
-                }
-                var streamReader = new MemoryStream();
-                _controlReader.BaseStream.CopyTo(streamReader);
-                clientData = streamReader.ToArray();
-
-                byte[] buffer = new byte[1024];
-                string message = "";
+                byte[] len = new byte[1024];
+                socket.Receive(len);
+                Console.WriteLine("longitud "+ BitConverter.ToInt32(len));
+                byte[] clientData = new byte[BitConverter.ToInt32(len)];
                 int bytesReceived = 0;
-                do
-                {
-                    bytesReceived += socket.Receive(buffer);
-                    clientData.Concat(buffer).ToArray();
-
-                } while (bytesReceived > 0);
-                //Console.WriteLine(message);
-               
+                bytesReceived = socket.Receive(clientData);
+                Console.WriteLine("clientData " + BitConverter.ToInt32(clientData,0));
 
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);

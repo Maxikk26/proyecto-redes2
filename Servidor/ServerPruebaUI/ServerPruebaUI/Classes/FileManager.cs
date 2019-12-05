@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,9 +71,9 @@ namespace Classes
             byte[] fileData = File.ReadAllBytes(fullPath);
             int x = 4 + fileNameByte.Length + fileData.Length;
             Console.WriteLine("longitud "+x.ToString());
-            writer.Write(x.ToString());
-            writer.Flush();
-            byte[] clientData = new byte[4 + fileNameByte.Length + fileData.Length];
+            socket.Send(BitConverter.GetBytes(x));
+            Thread.Sleep(3500);
+            byte[] clientData = new byte[x];
             byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
 
             fileNameLen.CopyTo(clientData, 0);
@@ -80,6 +81,7 @@ namespace Classes
             fileData.CopyTo(clientData, 4 + fileNameByte.Length);
             socket.Send(clientData);
             socket.Close();
+            
 
         }
 
