@@ -69,19 +69,19 @@ namespace Classes
             byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
 
             byte[] fileData = File.ReadAllBytes(fullPath);
-            int x = 4 + fileNameByte.Length + fileData.Length;
+            double x = 4 + fileNameByte.Length + fileData.Length;
+            int y = Convert.ToInt32(x);
             Console.WriteLine("longitud "+x.ToString());
-            socket.Send(BitConverter.GetBytes(x));
+            socket.Send(BitConverter.GetBytes(y));
+            
             Thread.Sleep(3500);
-            byte[] clientData = new byte[x];
+            byte[] clientData = new byte[y];
             byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
 
             fileNameLen.CopyTo(clientData, 0);
             fileNameByte.CopyTo(clientData, 4);
             fileData.CopyTo(clientData, 4 + fileNameByte.Length);
             socket.Send(clientData);
-            socket.Close();
-            
 
         }
 

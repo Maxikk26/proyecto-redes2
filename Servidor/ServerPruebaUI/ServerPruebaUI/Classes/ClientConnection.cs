@@ -84,7 +84,6 @@ namespace Classes
                                 break;
                             case "DOWN":
                                 Download(arguments);
-                                response = "221";
                                 break;
                             default:
                                 response = "502 Command not implemented";
@@ -96,7 +95,7 @@ namespace Classes
                     {
                         break;
                     }
-                    else
+                    /*else
                     {
                         _controlWriter.WriteLine(response);
                         _controlWriter.Flush();
@@ -105,7 +104,7 @@ namespace Classes
                         {
                             break;
                         }
-                    }
+                    }*/
                 }
             }catch(FileNotFoundException ex)
             {

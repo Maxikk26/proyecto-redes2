@@ -24,7 +24,7 @@ namespace ClientePrueba
         {
             _controlClient = c;
             socket = _controlClient.Client;
-            _controlClient.Connect("127.0.0.1", 21);
+            _controlClient.Connect("127.0.0.1", 50125);
             _controlStream = _controlClient.GetStream();
             _controlWriter = new StreamWriter(_controlStream);
             _controlReader = new StreamReader(_controlStream);
@@ -76,20 +76,20 @@ namespace ClientePrueba
                     }
                 }
             }*/
-            if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip")||msg.Contains(".jpg"))
+            if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip")||msg.Contains(".jpg")||msg.Contains(".pdf")||msg.Contains(".rar"))
             {
-                byte[] len = new byte[1024];
+                byte[] len = new byte[1024*5000];
                 socket.Receive(len);
                 Console.WriteLine("longitud "+ BitConverter.ToInt32(len));
                 byte[] clientData = new byte[BitConverter.ToInt32(len)];
-                int bytesReceived = 0;
+                decimal bytesReceived;
                 bytesReceived = socket.Receive(clientData);
                 Console.WriteLine("clientData " + BitConverter.ToInt32(clientData,0));
 
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
                 BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path +@"\"+ fileName));
-                bWrite.Write(clientData, 4 + fileNameLen, bytesReceived - 4 - fileNameLen);
+                bWrite.Write(clientData, 4 + fileNameLen, Convert.ToInt32(bytesReceived) - 4 - fileNameLen);
                 bWrite.Close();
 
             }
