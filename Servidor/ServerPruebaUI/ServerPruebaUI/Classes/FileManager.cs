@@ -63,7 +63,7 @@ namespace Classes
             }
         }
 
-        public void DownloadImage(Socket socket, string file,StreamWriter writer)
+        public void DownloadFromServer(Socket socket, string file)
         {
             fullPath = path + file;
             byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
@@ -83,6 +83,22 @@ namespace Classes
             fileData.CopyTo(clientData, 4 + fileNameByte.Length);
             socket.Send(clientData);
 
+        }
+
+        public void UploadToServer(Socket socket)
+        {
+            byte[] len = new byte[1024 * 5000];
+            socket.Receive(len);
+            Console.WriteLine("longitud " + BitConverter.ToInt32(len,0));
+            byte[] clientData = new byte[BitConverter.ToInt32(len, 0)];
+            decimal bytesReceived;
+            bytesReceived = socket.Receive(clientData);
+            Console.WriteLine("clientData " + BitConverter.ToInt32(clientData, 0));
+            int fileNameLen = BitConverter.ToInt32(clientData, 0);
+            string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
+            BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path+fileName));
+            bWrite.Write(clientData, 4 + fileNameLen, Convert.ToInt32(bytesReceived) - 4 - fileNameLen);
+            bWrite.Close();
         }
 
         

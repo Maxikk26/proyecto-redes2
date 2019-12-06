@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Drawing;
 using System.Text;
 using System.Linq;
+using System.Threading;
 
 namespace ClientePrueba
 {
@@ -43,6 +44,31 @@ namespace ClientePrueba
             
         }
 
+        public void send2(string msg)
+        {
+            string[] command = msg.Split(' ');
+            string cmd = command[0].ToUpperInvariant();
+            string arguments = command.Length > 1 ? msg.Substring(command[0].Length + 1) : null;
+            fullPath = path + @"\" + arguments;
+            if (File.Exists(fullPath))
+            {
+                Console.WriteLine("Existe el archivo!");
+                byte[] fileNameByte = Encoding.ASCII.GetBytes(arguments);
+                byte[] fileData = File.ReadAllBytes(fullPath);
+                double x = 4 + fileNameByte.Length + fileData.Length;
+                int y = Convert.ToInt32(x);
+                socket.Send(BitConverter.GetBytes(y));
+                Thread.Sleep(3500);
+                byte[] clientData = new byte[y];
+                byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
+                fileNameLen.CopyTo(clientData, 0);
+                fileNameByte.CopyTo(clientData,4);
+                fileData.CopyTo(clientData,4 + fileNameByte.Length);
+                socket.Send(clientData);
+            }
+
+        }
+
         public void receive()
         {
             String line;
@@ -54,28 +80,6 @@ namespace ClientePrueba
 
         public void receive2(string msg)
         {
-            /*if (msg.Contains(".txt"))
-            {
-                String line;
-                if (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
-                {
-                    if (line.Equals("FILENAME"))
-                    {
-                        line = _controlReader.ReadLine();
-                        fullPath = path + @"\" + line;
-                        if (File.Exists(fullPath))
-                            File.Delete(fullPath);
-                    }
-                    string s = "";
-                    while ((s = _controlReader.ReadLine()) != null)
-                    {
-                        if (s.Equals("221"))
-                            break;
-                        File.AppendAllText(fullPath, s);
-                        File.AppendAllText(fullPath, "\n");
-                    }
-                }
-            }*/
             if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip")||msg.Contains(".jpg")||msg.Contains(".pdf")||msg.Contains(".rar"))
             {
                 byte[] len = new byte[1024*5000];
@@ -85,7 +89,6 @@ namespace ClientePrueba
                 decimal bytesReceived;
                 bytesReceived = socket.Receive(clientData);
                 Console.WriteLine("clientData " + BitConverter.ToInt32(clientData,0));
-
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
                 BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path +@"\"+ fileName));

@@ -85,6 +85,9 @@ namespace Classes
                             case "DOWN":
                                 Download(arguments);
                                 break;
+                            case "UP":
+                                Upload();
+                                break;
                             default:
                                 response = "502 Command not implemented";
                                 break;
@@ -95,16 +98,6 @@ namespace Classes
                     {
                         break;
                     }
-                    /*else
-                    {
-                        _controlWriter.WriteLine(response);
-                        _controlWriter.Flush();
-
-                        if (response.StartsWith("221"))
-                        {
-                            break;
-                        }
-                    }*/
                 }
             }catch(FileNotFoundException ex)
             {
@@ -165,7 +158,12 @@ namespace Classes
 
         private void Download(string file)
         {
-           manager.DownloadImage(socket, file,_controlWriter);
+           manager.DownloadFromServer(socket, file);
+        }
+
+        private void Upload()
+        {
+            manager.UploadToServer(socket);
         }
 
         #endregion

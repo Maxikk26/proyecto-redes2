@@ -16,6 +16,9 @@ namespace ClientePrueba
             {
                 Console.Write("Enter Command: ");
                 msg = Console.ReadLine();
+                string[] command = msg.Split(' ');
+                string cmd = command[0].ToUpperInvariant();
+                string arguments = command.Length > 1 ? msg.Substring(command[0].Length + 1) : null;
                 if (msg.Equals("CLOSE"))
                 {
                     c.close();
@@ -23,8 +26,19 @@ namespace ClientePrueba
                 }
                 else
                 {
-                    c.send(msg);
-                    c.receive2(msg);
+                    if (cmd.Equals("UP"))
+                    {
+                        c.send(msg);
+                        c.send2(msg);
+                    }
+                    else if (cmd.Equals("DOWN"))
+                    {
+                        c.send(msg);
+                        c.receive2(msg);
+                    }
+                        
+                    
+                    
                 }
                 
             }
