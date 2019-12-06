@@ -17,8 +17,9 @@ namespace Classes
         private NetworkStream _controlStream;
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
+        private Socket socket;
 
-        private string _currentDirectory = @"C:\server";
+        private string _currentDirectory = @"C:\server\";
 
         private string _username;
 
@@ -29,6 +30,7 @@ namespace Classes
         {
             target = f1;
             _controlClient = client;
+            socket = _controlClient.Client;
             _controlStream = _controlClient.GetStream();
             _controlReader = new StreamReader(_controlStream);
             _controlWriter = new StreamWriter(_controlStream);
@@ -81,9 +83,10 @@ namespace Classes
                                 response = List(arguments);
                                 break;
                             case "DOWN":
-                                Console.WriteLine("Entro");
                                 Download(arguments);
-                                response = "221";
+                                break;
+                            case "UP":
+                                Upload();
                                 break;
                             default:
                                 response = "502 Command not implemented";
@@ -94,16 +97,6 @@ namespace Classes
                     if (_controlClient == null || !_controlClient.Connected)
                     {
                         break;
-                    }
-                    else
-                    {
-                        _controlWriter.WriteLine(response);
-                        _controlWriter.Flush();
-
-                        if (response.StartsWith("221"))
-                        {
-                            break;
-                        }
                     }
                 }
             }catch(FileNotFoundException ex)
@@ -165,9 +158,12 @@ namespace Classes
 
         private void Download(string file)
         {
-            Console.WriteLine("Funcion Download");
-            manager.Download(_controlClient,file);
-            Console.WriteLine("termino FileManager");
+           manager.DownloadFromServer(socket, file);
+        }
+
+        private void Upload()
+        {
+            manager.UploadToServer(socket);
         }
 
         #endregion

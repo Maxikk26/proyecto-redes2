@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Text;
 using System.Net.Sockets;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
+using System.Drawing;
+using System.Text;
+using System.Linq;
+using System.Threading;
 
 namespace ClientePrueba
 {
@@ -16,14 +14,18 @@ namespace ClientePrueba
         private NetworkStream _controlStream;
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
+        private Socket socket;
+
 
         private string path = @"C:\pruebas";
+        private string fullPath;
         private int BytesPerRead = 1024;
 
         public FtpClient(TcpClient c)
         {
             _controlClient = c;
-            _controlClient.Connect("127.0.0.1", 21);
+            socket = _controlClient.Client;
+            _controlClient.Connect("127.0.0.1", 50125);
             _controlStream = _controlClient.GetStream();
             _controlWriter = new StreamWriter(_controlStream);
             _controlReader = new StreamReader(_controlStream);
@@ -42,6 +44,31 @@ namespace ClientePrueba
             
         }
 
+        public void send2(string msg)
+        {
+            string[] command = msg.Split(' ');
+            string cmd = command[0].ToUpperInvariant();
+            string arguments = command.Length > 1 ? msg.Substring(command[0].Length + 1) : null;
+            fullPath = path + @"\" + arguments;
+            if (File.Exists(fullPath))
+            {
+                Console.WriteLine("Existe el archivo!");
+                byte[] fileNameByte = Encoding.ASCII.GetBytes(arguments);
+                byte[] fileData = File.ReadAllBytes(fullPath);
+                double x = 4 + fileNameByte.Length + fileData.Length;
+                int y = Convert.ToInt32(x);
+                socket.Send(BitConverter.GetBytes(y));
+                Thread.Sleep(3500);
+                byte[] clientData = new byte[y];
+                byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
+                fileNameLen.CopyTo(clientData, 0);
+                fileNameByte.CopyTo(clientData,4);
+                fileData.CopyTo(clientData,4 + fileNameByte.Length);
+                socket.Send(clientData);
+            }
+
+        }
+
         public void receive()
         {
             String line;
@@ -51,17 +78,25 @@ namespace ClientePrueba
             }
         }
 
-        public void receive2()
+        public void receive2(string msg)
         {
-            using (var output = File.Create(path + @"\Data"))
+            if (msg.Contains(".txt") || msg.Contains(".png")||msg.Contains(".docx")||msg.Contains(".xlsx")||msg.Contains(".zip")||msg.Contains(".jpg")||msg.Contains(".pdf")||msg.Contains(".rar"))
             {
-                var buffer = new byte[BytesPerRead];
-                int bytesRead;
-                while ((bytesRead = _controlStream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    output.Write(buffer, 0, bytesRead);
-                }
+                byte[] len = new byte[1024*5000];
+                socket.Receive(len);
+                Console.WriteLine("longitud "+ BitConverter.ToInt32(len));
+                byte[] clientData = new byte[BitConverter.ToInt32(len)];
+                decimal bytesReceived;
+                bytesReceived = socket.Receive(clientData);
+                Console.WriteLine("clientData " + BitConverter.ToInt32(clientData,0));
+                int fileNameLen = BitConverter.ToInt32(clientData, 0);
+                string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
+                BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path +@"\"+ fileName));
+                bWrite.Write(clientData, 4 + fileNameLen, Convert.ToInt32(bytesReceived) - 4 - fileNameLen);
+                bWrite.Close();
+
             }
+
         }
     }
 }
