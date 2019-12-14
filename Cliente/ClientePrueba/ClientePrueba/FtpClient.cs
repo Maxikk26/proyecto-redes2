@@ -19,7 +19,6 @@ namespace ClientePrueba
 
         private string path = @"C:\pruebas";
         private string fullPath;
-        private int BytesPerRead = 1024;
 
         public FtpClient(TcpClient c)
         {
@@ -71,11 +70,11 @@ namespace ClientePrueba
 
         public void receive()
         {
-            String line;
-            if (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
-            {
-                Console.WriteLine(line);
-            }
+            byte[] buffer = new byte[1024];
+            socket.Receive(buffer);
+            var str = System.Text.Encoding.Default.GetString(buffer);
+            Console.WriteLine(str);
+
         }
 
         public void receive2(string msg)

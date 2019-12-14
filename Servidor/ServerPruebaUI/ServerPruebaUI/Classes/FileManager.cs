@@ -42,46 +42,41 @@ namespace Classes
             
         }
 
-        public void DownloadTxt(StreamWriter writer, string file)
+        public void List(string fullPath, Socket socket)
         {
-            fullPath = path + @"\" + file;
-            if (File.Exists(fullPath))
-            {
-                writer.WriteLine("FILENAME");
-                writer.Flush();
-                writer.WriteLine(file);
-                writer.Flush();
-                using (StreamReader sr = File.OpenText(fullPath))
-                {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        writer.WriteLine(s);
-                        writer.Flush();
-                    }
-                }
-            }
+            string[] files = Directory.GetFiles(fullPath, "*.*")
+                                     .Select(Path.GetFileName)
+                                     .ToArray();
+            string result = string.Join(",", files);
+            byte[] buffer = new byte[1024];
+            buffer = Encoding.ASCII.GetBytes(result);
+            socket.Send(buffer);
         }
 
         public void DownloadFromServer(Socket socket, string file)
         {
             fullPath = path + file;
-            byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
+            if (File.Exists(fullPath))
+            {
+                byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
 
-            byte[] fileData = File.ReadAllBytes(fullPath);
-            double x = 4 + fileNameByte.Length + fileData.Length;
-            int y = Convert.ToInt32(x);
-            Console.WriteLine("longitud "+x.ToString());
-            socket.Send(BitConverter.GetBytes(y));
+                byte[] fileData = File.ReadAllBytes(fullPath);
+                double x = 4 + fileNameByte.Length + fileData.Length;
+                int y = Convert.ToInt32(x);
+                Console.WriteLine("longitud " + x.ToString());
+                socket.Send(BitConverter.GetBytes(y));
+
+                Thread.Sleep(3500);
+                byte[] clientData = new byte[y];
+                byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
+
+                fileNameLen.CopyTo(clientData, 0);
+                fileNameByte.CopyTo(clientData, 4);
+                fileData.CopyTo(clientData, 4 + fileNameByte.Length);
+                socket.Send(clientData);
+            }
             
-            Thread.Sleep(3500);
-            byte[] clientData = new byte[y];
-            byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
-
-            fileNameLen.CopyTo(clientData, 0);
-            fileNameByte.CopyTo(clientData, 4);
-            fileData.CopyTo(clientData, 4 + fileNameByte.Length);
-            socket.Send(clientData);
+           
 
         }
 

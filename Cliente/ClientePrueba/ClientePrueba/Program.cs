@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Drawing;
+using System.Threading;
 
 namespace ClientePrueba
 {
@@ -35,6 +36,14 @@ namespace ClientePrueba
                     {
                         c.send(msg);
                         c.receive2(msg);
+                    }
+                    else if (cmd.Equals("LIST"))
+                    {
+                        c.send(msg);
+                        Console.WriteLine("Envio mensaje LIST");
+                        Thread.Sleep(1000);
+                        c.receive();
+                        Console.WriteLine("Paso c.receive ");
                     }
                         
                     

@@ -19,7 +19,7 @@ namespace Classes
         private StreamWriter _controlWriter;
         private Socket socket;
 
-        private string _currentDirectory = @"C:\server\";
+        private string _currentDirectory = @"C:\server";
 
         private string _username;
 
@@ -80,7 +80,7 @@ namespace Classes
                                 Close();
                                 break;
                             case "LIST":
-                                response = List(arguments);
+                                List();
                                 break;
                             case "DOWN":
                                 Download(arguments);
@@ -98,8 +98,15 @@ namespace Classes
                     {
                         break;
                     }
+                    else if (!(String.IsNullOrEmpty(response)))
+                    {
+                        Console.WriteLine("response: " + response);
+                        _controlWriter.Write(response);
+                        _controlWriter.Flush();
+                    }
+                    
                 }
-            }catch(FileNotFoundException ex)
+            } catch (FileNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;
@@ -139,15 +146,14 @@ namespace Classes
             return "250 Changed to new directory";
         }
 
-        private string List(string pathname)
+        private void List()
         {
-            if (pathname == null)
-            {
-                pathname = string.Empty;
-            }
-            pathname = new DirectoryInfo(Path.Combine(_currentDirectory, pathname)).FullName;
-            return pathname;
+            string fullPath = _currentDirectory;
+            manager.List(fullPath, socket);
         }
+    
+    
+    
 
         private void Close()
         {
