@@ -39,8 +39,8 @@ namespace Classes
 
         public void HandleClient(Object obj)
         {
-            _controlWriter.WriteLine("220 Service Ready.");
-            _controlWriter.Flush();
+            //_controlWriter.WriteLine("220 Service Ready.");
+            //_controlWriter.Flush();
             string line;
             try
             {
