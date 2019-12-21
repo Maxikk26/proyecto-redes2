@@ -25,3 +25,12 @@ C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPr
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.GenerateResource.cache
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.exe
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.pdb
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.exe.config
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.exe
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.pdb
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csprojAssemblyReference.cache
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.Server.resources
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Properties.Resources.resources
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.GenerateResource.cache
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.exe
+C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.pdb

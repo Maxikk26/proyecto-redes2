@@ -34,7 +34,7 @@ namespace ClienteUI.backend
                 stream = client.GetStream();
                 socket = client.Client;
                 writer = new StreamWriter(stream);
-                Receive();
+                //Receive();
             } 
             catch(ArgumentNullException e)
             {
@@ -56,11 +56,38 @@ namespace ClienteUI.backend
 
         public void Receive()
         {
+
+/*
             byte[] buffer = new byte[1024];
             socket.Receive(buffer);
-            var str = Encoding.ASCII.GetString(buffer);
-            Console.WriteLine("str: "+str);
+            Console.WriteLine(BitConverter.ToInt32(buffer,0));
 
+            byte[] data = new byte[BitConverter.ToInt32(buffer,0)];
+
+            socket.Receive(data);
+
+            //Console.WriteLine(BitConverter.ToString(data));*/
+
+            byte[] buffer = new byte[1024];
+
+            int x = socket.Receive(buffer);
+            char[] chars = new char[x];
+            System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
+            int charLen = d.GetChars(buffer, 0, x, chars, 0);
+            System.String recv = new System.String(chars);
+            Console.WriteLine(recv);
+            /*
+            var str = Encoding.ASCII.GetString(buffer);
+            
+            string auxstr = "";
+
+            foreach(char c in str)
+            {
+                if (c != '?')
+                    auxstr += c.ToString();
+            }
+
+            Console.WriteLine("hola: " + auxstr);*/
         }
 
         public void Send(String message)

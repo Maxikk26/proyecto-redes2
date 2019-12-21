@@ -116,8 +116,6 @@ namespace Classes
                 Console.WriteLine(ex);
                 throw;
             }
-
-
         }
 
         #region FTP Commands

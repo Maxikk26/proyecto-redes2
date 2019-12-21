@@ -47,7 +47,5 @@ namespace Classes
             ClientConnection connection = new ClientConnection(client,target);
             ThreadPool.QueueUserWorkItem(connection.HandleClient, client);
         }
-
-        
     }
 }
