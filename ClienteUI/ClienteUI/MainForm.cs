@@ -81,11 +81,13 @@ namespace ClienteUI
             }
                
         }
-
+        [STAThread]
         private void DynamicButton_Click(object sender, EventArgs e, Button button)
         {
-            MessageBox.Show("Dynamic button is clicked "+button.Name);
-            ftp.Download(button.Name);
+            Console.WriteLine("button.Name: "+button.Name);
+            OptionForm form = new OptionForm(button.Name);
+            form.ShowDialog();
+            //ftp.Download(button.Name);
         }
 
         private void btnUpload_Click(object sender, EventArgs e)

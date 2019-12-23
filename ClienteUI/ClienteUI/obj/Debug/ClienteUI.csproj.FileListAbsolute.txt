@@ -28,3 +28,4 @@ C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\Client
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.csproj.GenerateResource.cache
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.exe
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.pdb
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionForm.resources
