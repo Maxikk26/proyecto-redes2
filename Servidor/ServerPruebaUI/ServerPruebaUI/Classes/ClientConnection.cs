@@ -83,6 +83,7 @@ namespace Classes
                                 List();
                                 break;
                             case "DOWN":
+                                Console.WriteLine("arguments: "+arguments);
                                 Download(arguments);
                                 break;
                             case "UP":

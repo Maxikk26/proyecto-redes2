@@ -48,22 +48,10 @@ namespace Classes
                                      .Select(Path.GetFileName)
                                      .ToArray();
             string result = string.Join(",", files);
-
+            result = result + ",";
             byte[] buffer = new byte[1024];
             buffer = System.Text.Encoding.ASCII.GetBytes(result);
             socket.Send(buffer);
-
-            /*
-
-            int x = Convert.ToInt32(result.Length);
-            Console.WriteLine(x);
-            socket.Send(BitConverter.GetBytes(x));
-            Thread.Sleep(1500);
-
-            byte[] buffer = new byte[x];
-            buffer = Encoding.ASCII.GetBytes(result);
-            socket.Send(buffer);
-            */
         }
 
         public void DownloadFromServer(Socket socket, string file)
@@ -78,7 +66,7 @@ namespace Classes
                 int y = Convert.ToInt32(x);
                 Console.WriteLine("longitud " + x.ToString());
                 socket.Send(BitConverter.GetBytes(y));
-
+                Console.WriteLine("Enviada la longitud");
                 Thread.Sleep(3500);
                 byte[] clientData = new byte[y];
                 byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);

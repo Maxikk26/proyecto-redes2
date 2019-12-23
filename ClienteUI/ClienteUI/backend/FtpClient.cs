@@ -4,12 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ClienteUI.backend
 {
     public class FtpClient
     {
+        private FileManager manager;
+
         private string ip;
         private Int32 port;
 
@@ -22,6 +25,7 @@ namespace ClienteUI.backend
         {
             ip = _ip;
             port = _port;
+            
 
         }
 
@@ -33,6 +37,7 @@ namespace ClienteUI.backend
                 client.Connect(ip, port);
                 stream = client.GetStream();
                 socket = client.Client;
+                manager = new FileManager(socket);
                 writer = new StreamWriter(stream);
             } 
             catch(ArgumentNullException e)
@@ -53,7 +58,7 @@ namespace ClienteUI.backend
             
         }
 
-        public string Receive()
+        public string ReceiveList()
         {
             byte[] buffer = new byte[1024];
             int x = socket.Receive(buffer);
@@ -61,7 +66,6 @@ namespace ClienteUI.backend
             System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
             int charLen = d.GetChars(buffer, 0, x, chars, 0);
             System.String recv = new System.String(chars);
-            Console.WriteLine(recv);
             return recv;
         }
 
@@ -74,8 +78,25 @@ namespace ClienteUI.backend
         public string List()
         {
             Send("LIST");
-            string receive = Receive();
+            string receive = ReceiveList();
             return receive;
+        }
+
+        public void Download(string name)
+        {
+            Console.WriteLine("name: "+name);
+            string msg = "DOWN " + name;
+            Send(msg);
+            Thread.Sleep(500);
+            manager.Download();
+        }
+
+        public void Upload(string fullPath, string fileName)
+        {
+            string msg = "UP " + fileName;
+            Send(msg);
+            Thread.Sleep(500);
+            manager.Upload(fullPath,fileName);
         }
 
 

@@ -12,7 +12,7 @@ namespace ClientePrueba
             String msg;
             TcpClient client = new TcpClient();
             FtpClient c = new FtpClient(client);
-            c.receive();
+            //c.receive();
             while (true)
             {
                 Console.Write("Enter Command: ");

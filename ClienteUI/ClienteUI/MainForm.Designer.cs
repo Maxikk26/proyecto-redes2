@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnDisconnect = new System.Windows.Forms.Button();
-            this.btnList = new System.Windows.Forms.Button();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -42,22 +42,22 @@
             this.btnDisconnect.UseVisualStyleBackColor = true;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
-            // btnList
+            // btnUpload
             // 
-            this.btnList.Location = new System.Drawing.Point(533, 88);
-            this.btnList.Name = "btnList";
-            this.btnList.Size = new System.Drawing.Size(101, 31);
-            this.btnList.TabIndex = 1;
-            this.btnList.Text = "List";
-            this.btnList.UseVisualStyleBackColor = true;
-            this.btnList.Click += new System.EventHandler(this.btnList_Click);
+            this.btnUpload.Location = new System.Drawing.Point(533, 84);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(105, 31);
+            this.btnUpload.TabIndex = 1;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 346);
-            this.Controls.Add(this.btnList);
+            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnDisconnect);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -68,6 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnDisconnect;
-        private System.Windows.Forms.Button btnList;
+        private System.Windows.Forms.Button btnUpload;
     }
 }

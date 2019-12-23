@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -15,9 +16,13 @@ namespace ClienteUI
     {
         private LoginForm login;
         private backend.FtpClient ftp;
+        private backend.FileManager manager;
+        private List<Button> buttonsAdded = new List<Button>();
+
         public MainForm(backend.FtpClient ftpClient)
         {
             ftp = ftpClient;
+            ListFiles();
             InitializeComponent();
         }
 
@@ -34,7 +39,7 @@ namespace ClienteUI
             this.Close();
         }
 
-        private void btnList_Click(object sender, EventArgs e)
+        private void ListFiles()
         {
             string list = ftp.List();
             int count=0;
@@ -57,17 +62,18 @@ namespace ClienteUI
                 {
                     aux = aux + d;
                 }
-                else if (d == ',')
+                else
                 {
                     string[] aux2 = aux.Split('.');
                     string text = aux2[0];
                     Button button = new Button();
                     button.Text = text;
-                    button.Name = text;
+                    button.Name = aux;
                     button.Left = left;
                     button.Top = top;
                     button.Click += (sender2, e2) => DynamicButton_Click(sender2,e2,button);
                     this.Controls.Add(button);
+                    buttonsAdded.Insert(0, button);
                     top += button.Height + 2;
                     aux = "";
                 }
@@ -77,12 +83,41 @@ namespace ClienteUI
         }
 
         private void DynamicButton_Click(object sender, EventArgs e, Button button)
-
         {
-           
-
             MessageBox.Show("Dynamic button is clicked "+button.Name);
+            ftp.Download(button.Name);
+        }
 
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    string fileName = openFileDialog1.SafeFileName;
+                    ftp.Upload(file, fileName);
+                }
+                catch (IOException)
+                {
+                }
+            }
+            if (buttonsAdded.Count > 0)
+            {
+                foreach(Control item in Controls.OfType<Button>())
+                {
+                    if(!item.Name.Contains("btn"))
+                    {
+                        Controls.Remove(item);
+                    }
+                }
+                ListFiles();
+            }
+            
+            //Console.WriteLine(size); // <-- Shows file size in debugging mode.
+            Console.WriteLine(result); // <-- For debugging use.
         }
     }
 
