@@ -59,13 +59,14 @@ namespace ClienteUI.backend
 
         }
 
-        public string CreateFolder()
+        public string ReceivedData()
         {
             byte[] dataRecieved = new byte[1024];
             socket.Receive(dataRecieved);
             string response = Encoding.ASCII.GetString(dataRecieved);
             return response;
         }
+
 
     }
 }

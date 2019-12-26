@@ -18,10 +18,10 @@ namespace Classes
         private StreamReader _controlReader;
         private StreamWriter _controlWriter;
         private Socket socket;
+        private string _username;
 
         private string _currentDirectory = @"C:\server";
         private bool aux;
-        private string _username;
 
         private Server target;
         private FileManager manager;
@@ -61,7 +61,7 @@ namespace Classes
                         switch (cmd)
                         {
                             case "USER":
-                                response = User(arguments);
+                                User(arguments);
                                 break;
                             case "PASS":
                                 response = Password(arguments);
@@ -83,7 +83,7 @@ namespace Classes
                                 List();
                                 break;
                             case "DOWN":
-                                Console.WriteLine("arguments: " + arguments);
+                                //Console.WriteLine("arguments: " + arguments);
                                 Download(arguments);
                                 break;
                             case "UP":
@@ -103,6 +103,28 @@ namespace Classes
                             case "LIST-D":
                                 ListDirectories();
                                 break;
+                            case "DEL-D":
+                                aux = Delete(arguments);
+                                if (aux)
+                                {
+                                    response = "Deleted Successfully!";
+                                }
+                                else
+                                {
+                                    response = "Error!";
+                                }
+                                break;
+                            case "DEL-F":
+                                aux = DeleteFile(arguments);
+                                if (aux)
+                                {
+                                    response = "Deleted Successfully!";
+                                }
+                                else
+                                {
+                                    response = "Error!";
+                                }
+                                break;
                             default:
                                 response = "502 Command not implemented";
                                 break;
@@ -115,7 +137,7 @@ namespace Classes
                     }
                     else if (!(String.IsNullOrEmpty(response)))
                     {
-                        Console.WriteLine("response: " + response);
+                        //Console.WriteLine("response: " + response);
                         _controlWriter.Write(response);
                         _controlWriter.Flush();
                     }
@@ -135,11 +157,10 @@ namespace Classes
 
         #region FTP Commands
 
-        private string User(string username)
+        private void User(string username)
         {
             _username = username;
-
-            return "331 Username ok, need password";
+            _currentDirectory = _currentDirectory + @"\" + username;
         }
 
         private string Password(string password)
@@ -162,12 +183,15 @@ namespace Classes
         private void List()
         {
             string fullPath = _currentDirectory;
+            Console.WriteLine("fullPath-list: "+fullPath);
             manager.List(fullPath, socket);
         }
 
         private void ListDirectories()
         {
-            manager.ListDirectories(_currentDirectory,socket);
+            string fullPath = _currentDirectory;
+            Console.WriteLine("fullPath-directories"+fullPath);
+            manager.ListDirectories(fullPath, socket);
         }
 
 
@@ -180,19 +204,32 @@ namespace Classes
 
         private void Download(string file)
         {
-            manager.DownloadFromServer(socket, file);
+            
+            manager.DownloadFromServer(socket, file,_currentDirectory);
         }
 
         private void Upload()
         {
-            manager.UploadToServer(socket);
+            manager.UploadToServer(socket,_currentDirectory);
         }
 
         private bool CreateFolder(string name)
         {
-            bool check = manager.CreateFolder(name);
+            bool check = manager.CreateFolder(name,_currentDirectory);
             return check;
             
+        }
+
+        private bool Delete(string arguments)
+        {
+            bool check = manager.Delete(arguments,_currentDirectory,true);
+            return check;
+        }
+
+        private bool DeleteFile(string arguments)
+        {
+            bool check = manager.Delete(arguments, _currentDirectory,false);
+            return check;
         }
 
         #endregion

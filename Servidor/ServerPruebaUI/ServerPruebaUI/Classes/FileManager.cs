@@ -48,27 +48,54 @@ namespace Classes
                                      .Select(Path.GetFileName)
                                      .ToArray();
             string result = string.Join(",", files);
-            result = result + ",";
-            Console.WriteLine("Lista: " + result);
-            byte[] buffer = new byte[1024];
-            buffer = System.Text.Encoding.ASCII.GetBytes(result);
-            socket.Send(buffer);
+            //Console.WriteLine("result: " + result);
+            if (!String.IsNullOrEmpty(result))
+            {
+                result = result + ",";
+                //Console.WriteLine("Lista: " + result);
+                byte[] buffer = new byte[1024];
+                buffer = System.Text.Encoding.ASCII.GetBytes(result);
+                socket.Send(buffer);
+            }
+            else
+            {
+                string empty = "empty";
+                byte[] buffer = new byte[1024];
+                buffer = System.Text.Encoding.ASCII.GetBytes(empty);
+                socket.Send(buffer);
+            }
+                
         }
 
         public void ListDirectories(string path, Socket socket)
         {
-            var directories = Directory.GetDirectories(path);
-            string result = string.Join(",", directories);
-            result = result + ",";
-            byte[] buffer = new byte[1024];
-            buffer = Encoding.ASCII.GetBytes(result);
-            socket.Send(buffer);
-            Console.WriteLine("Directories: " + result);
+            string[] directories = Directory.GetDirectories(path);
+            Console.WriteLine("directories - " + directories.ToString());
+            string result = "";
+            result = string.Join(",", directories);
+
+            if (!String.IsNullOrEmpty(result))
+            {
+                result = result + ",";
+                byte[] buffer = new byte[1024];
+                buffer = Encoding.ASCII.GetBytes(result);
+                socket.Send(buffer);
+                Console.WriteLine("Directories: " + result);
+            }
+            else
+            {
+                string empty = "empty";
+                byte[] buffer = new byte[1024];
+                buffer = System.Text.Encoding.ASCII.GetBytes(empty);
+                socket.Send(buffer);
+            }
+               
         }
 
-        public void DownloadFromServer(Socket socket,string file)
+        public void DownloadFromServer(Socket socket,string file,string currentDirectory)
         {
-            fullPath = path + file;
+            fullPath = currentDirectory + @"\" + file;
+            Console.WriteLine("file-down: " + file);
             if (File.Exists(fullPath))
             {
                 byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
@@ -90,8 +117,9 @@ namespace Classes
             }
         }
 
-        public void UploadToServer(Socket socket)
+        public void UploadToServer(Socket socket,string destiny)
         {
+            destiny += @"\";
             byte[] len = new byte[1024 * 5000];
             socket.Receive(len);
             Console.WriteLine("longitud " + BitConverter.ToInt32(len,0));
@@ -101,22 +129,24 @@ namespace Classes
             Console.WriteLine("clientData " + BitConverter.ToInt32(clientData, 0));
             int fileNameLen = BitConverter.ToInt32(clientData, 0);
             string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
-            BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path+fileName));
+            BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(destiny+fileName));
             bWrite.Write(clientData, 4 + fileNameLen, Convert.ToInt32(bytesReceived) - 4 - fileNameLen);
             bWrite.Close();
         }
 
-        public bool CreateFolder(string name)
+        public bool CreateFolder(string name, string currentDirectory)
         {
+            path = currentDirectory + @"\" + name;
             try
             {
-                if (Directory.Exists(path+name))
+                if (Directory.Exists(path))
                 {
                     return false;
                 }
                 else
                 {
-                    DirectoryInfo di = Directory.CreateDirectory(path+name);
+                    string folder = path;
+                    DirectoryInfo di = Directory.CreateDirectory(folder);
                     return true;
                 }
             }
@@ -125,5 +155,38 @@ namespace Classes
                 throw e;
             }
         }
+
+        public bool Delete(string name,string currentDirectory,bool check)
+        {
+            try
+            {
+                if (check)
+                    Directory.Delete(currentDirectory + @"\" + name);
+                else
+                    File.Delete(currentDirectory + @"\" + name);
+                return true;
+            }
+            catch(UnauthorizedAccessException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+            catch(PathTooLongException e)
+            {
+                return false;
+            }
+            catch(DirectoryNotFoundException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        
     }
 }

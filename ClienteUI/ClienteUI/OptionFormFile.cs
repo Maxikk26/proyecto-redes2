@@ -11,31 +11,32 @@ using System.Windows.Forms;
 
 namespace ClienteUI
 {
-    public partial class OptionForm : Form
+    public partial class OptionFormFile : Form
     {
         private backend.FtpClient ftp;
         private string fileName;
         private string path = @"C:\server\";
         private MainForm main;
-        public OptionForm(string file, backend.FtpClient ftpClient, MainForm form)
+        private string response;
+        public OptionFormFile(string file, backend.FtpClient ftpClient, MainForm form, string _path)
         {
             ftp = ftpClient;
             fileName = file;
             main = form;
+            path = path + _path;
             InitializeComponent();
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            ftp.Download(fileName);
+            ftp.Download(fileName,path);
             MessageBox.Show("Downloaded succesfuly!", "Download", MessageBoxButtons.OK);
             this.Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            File.Delete(path+fileName);
-            main.RefreshButtons();
+            response = ftp.DeleteFile(fileName);
             main.RefreshButtons();
             MessageBox.Show("Deleted succesfuly!", "Download", MessageBoxButtons.OK);
             this.Close();

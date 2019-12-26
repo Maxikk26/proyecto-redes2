@@ -31,6 +31,7 @@
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -63,11 +64,21 @@
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
+            // btnReturn
+            // 
+            this.btnReturn.Location = new System.Drawing.Point(533, 177);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(105, 31);
+            this.btnReturn.TabIndex = 3;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 346);
+            this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnDisconnect);
@@ -82,5 +93,6 @@
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Button btnReturn;
     }
 }

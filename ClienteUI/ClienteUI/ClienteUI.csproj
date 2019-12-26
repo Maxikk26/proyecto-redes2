@@ -66,11 +66,17 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OptionForm.cs">
+    <Compile Include="OptionFormFile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionForm.Designer.cs">
-      <DependentUpon>OptionForm.cs</DependentUpon>
+    <Compile Include="OptionFormFile.Designer.cs">
+      <DependentUpon>OptionFormFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionFormFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionFormFolder.Designer.cs">
+      <DependentUpon>OptionFormFolder.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,8 +89,11 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionForm.resx">
-      <DependentUpon>OptionForm.cs</DependentUpon>
+    <EmbeddedResource Include="OptionFormFile.resx">
+      <DependentUpon>OptionFormFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionFormFolder.resx">
+      <DependentUpon>OptionFormFolder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

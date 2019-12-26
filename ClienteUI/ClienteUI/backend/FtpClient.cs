@@ -15,7 +15,6 @@ namespace ClienteUI.backend
 
         private string ip;
         private Int32 port;
-        private string path = @"C:\server";
 
         private TcpClient client;
         private NetworkStream stream;
@@ -30,7 +29,7 @@ namespace ClienteUI.backend
 
         }
 
-        public void Connect()
+        public void Connect(string user)
         {
             try
             {
@@ -40,6 +39,8 @@ namespace ClienteUI.backend
                 socket = client.Client;
                 manager = new FileManager(socket);
                 writer = new StreamWriter(stream);
+                string msg = "USER " + user;
+                Send(msg);
             } 
             catch(ArgumentNullException e)
             {
@@ -85,14 +86,14 @@ namespace ClienteUI.backend
 
         public string ListDirectories()
         {
-            string msg = "LIST-D " + path;
+            string msg = "LIST-D";
             Send(msg);
             string response = ReceiveList();
-            Console.WriteLine(response);
+            Console.WriteLine("response: "+response);
             return response;
         }
 
-        public void Download(string name)
+        public void Download(string name,string path)
         {
             Console.WriteLine("name: "+name);
             string msg = "DOWN " + name;
@@ -101,9 +102,11 @@ namespace ClienteUI.backend
             manager.Download();
         }
 
-        public void Upload(string fullPath, string fileName)
+        public void Upload(string fullPath, string fileName,string destiny)
         {
-            string msg = "UP " + fileName;
+            Console.WriteLine("fullPath: "+fullPath);
+            Console.WriteLine("fileName: " + fileName);
+            string msg = "UP";
             Send(msg);
             Thread.Sleep(500);
             manager.Upload(fullPath,fileName);
@@ -113,7 +116,23 @@ namespace ClienteUI.backend
         {
             string msg = "CRT " + name;
             Send(msg);
-            string response = manager.CreateFolder();
+            string response = manager.ReceivedData();
+            return response;
+        }
+
+        public string DeleteFolder(string name,string path)
+        {
+            string msg = "DEL-D "+name;
+            Send(msg);
+            string response = manager.ReceivedData();
+            return response;
+        }
+
+        public string DeleteFile(string name)
+        {
+            string msg = "DEL-F " + name;
+            Send(msg);
+            string response = manager.ReceivedData();
             return response;
         }
 

@@ -55,8 +55,8 @@ namespace ClienteUI
                         string user = txtUser.Text;
                         string pass = txtPass.Text;
                         ftpClient = new backend.FtpClient(ip,port);
-                        ftpClient.Connect();
-                        main = new MainForm(ftpClient);
+                        ftpClient.Connect(user);
+                        main = new MainForm(ftpClient,user,false);
                         main.Show();
                         main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
                         this.Hide();

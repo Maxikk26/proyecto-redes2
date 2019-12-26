@@ -1,6 +1,6 @@
 ﻿namespace ClienteUI
 {
-    partial class OptionForm
+    partial class OptionFormFile
     {
         /// <summary>
         /// Required designer variable.
