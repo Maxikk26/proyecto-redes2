@@ -14,7 +14,7 @@ namespace ServerUI
 {
     public partial class Server : Form
     {
-        private int count= 0;
+        private int count = 0;
         private Classes.FtpServer ftp;
         private Classes.FileManager file;
 

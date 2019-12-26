@@ -49,12 +49,24 @@ namespace Classes
                                      .ToArray();
             string result = string.Join(",", files);
             result = result + ",";
+            Console.WriteLine("Lista: " + result);
             byte[] buffer = new byte[1024];
             buffer = System.Text.Encoding.ASCII.GetBytes(result);
             socket.Send(buffer);
         }
 
-        public void DownloadFromServer(Socket socket, string file)
+        public void ListDirectories(string path, Socket socket)
+        {
+            var directories = Directory.GetDirectories(path);
+            string result = string.Join(",", directories);
+            result = result + ",";
+            byte[] buffer = new byte[1024];
+            buffer = Encoding.ASCII.GetBytes(result);
+            socket.Send(buffer);
+            Console.WriteLine("Directories: " + result);
+        }
+
+        public void DownloadFromServer(Socket socket,string file)
         {
             fullPath = path + file;
             if (File.Exists(fullPath))
@@ -92,6 +104,26 @@ namespace Classes
             BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path+fileName));
             bWrite.Write(clientData, 4 + fileNameLen, Convert.ToInt32(bytesReceived) - 4 - fileNameLen);
             bWrite.Close();
+        }
+
+        public bool CreateFolder(string name)
+        {
+            try
+            {
+                if (Directory.Exists(path+name))
+                {
+                    return false;
+                }
+                else
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(path+name);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

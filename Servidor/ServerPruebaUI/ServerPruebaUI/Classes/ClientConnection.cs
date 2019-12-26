@@ -20,7 +20,7 @@ namespace Classes
         private Socket socket;
 
         private string _currentDirectory = @"C:\server";
-
+        private bool aux;
         private string _username;
 
         private Server target;
@@ -79,15 +79,29 @@ namespace Classes
                                 response = "Closing connection...";
                                 Close();
                                 break;
-                            case "LIST":
+                            case "LIST-F":
                                 List();
                                 break;
                             case "DOWN":
-                                Console.WriteLine("arguments: "+arguments);
+                                Console.WriteLine("arguments: " + arguments);
                                 Download(arguments);
                                 break;
                             case "UP":
                                 Upload();
+                                break;
+                            case "CRT":
+                                aux = CreateFolder(arguments);
+                                if (aux)
+                                {
+                                    response = "Created Successfully!";
+                                }
+                                else
+                                {
+                                    response = "Already Exists!";
+                                }
+                                break;
+                            case "LIST-D":
+                                ListDirectories();
                                 break;
                             default:
                                 response = "502 Command not implemented";
@@ -105,7 +119,7 @@ namespace Classes
                         _controlWriter.Write(response);
                         _controlWriter.Flush();
                     }
-                    
+
                 }
             } catch (FileNotFoundException ex)
             {
@@ -150,9 +164,12 @@ namespace Classes
             string fullPath = _currentDirectory;
             manager.List(fullPath, socket);
         }
-    
-    
-    
+
+        private void ListDirectories()
+        {
+            manager.ListDirectories(_currentDirectory,socket);
+        }
+
 
         private void Close()
         {
@@ -163,12 +180,19 @@ namespace Classes
 
         private void Download(string file)
         {
-           manager.DownloadFromServer(socket, file);
+            manager.DownloadFromServer(socket, file);
         }
 
         private void Upload()
         {
             manager.UploadToServer(socket);
+        }
+
+        private bool CreateFolder(string name)
+        {
+            bool check = manager.CreateFolder(name);
+            return check;
+            
         }
 
         #endregion

@@ -30,6 +30,7 @@
         {
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -52,11 +53,22 @@
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(533, 131);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(105, 31);
+            this.btnCreate.TabIndex = 2;
+            this.btnCreate.Text = "Create Folder";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 346);
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnDisconnect);
             this.Name = "MainForm";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnCreate;
     }
 }

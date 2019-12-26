@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="backend\FileManager.cs" />
     <Compile Include="backend\FtpClient.cs" />
+    <Compile Include="FolderNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FolderNameForm.Designer.cs">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FolderNameForm.resx">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

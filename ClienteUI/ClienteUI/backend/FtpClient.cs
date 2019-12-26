@@ -15,6 +15,7 @@ namespace ClienteUI.backend
 
         private string ip;
         private Int32 port;
+        private string path = @"C:\server";
 
         private TcpClient client;
         private NetworkStream stream;
@@ -77,9 +78,18 @@ namespace ClienteUI.backend
 
         public string List()
         {
-            Send("LIST");
+            Send("LIST-F");
             string receive = ReceiveList();
             return receive;
+        }
+
+        public string ListDirectories()
+        {
+            string msg = "LIST-D " + path;
+            Send(msg);
+            string response = ReceiveList();
+            Console.WriteLine(response);
+            return response;
         }
 
         public void Download(string name)
@@ -99,7 +109,13 @@ namespace ClienteUI.backend
             manager.Upload(fullPath,fileName);
         }
 
-
+        public string CreateFolder(string name)
+        {
+            string msg = "CRT " + name;
+            Send(msg);
+            string response = manager.CreateFolder();
+            return response;
+        }
 
     }
 }
