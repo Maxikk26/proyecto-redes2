@@ -20,20 +20,29 @@ namespace ClienteUI
         private List<Button> buttonsAdded = new List<Button>();
         private FolderNameForm form;
         private string path;
+        private int count = 0;
 
-        public MainForm(backend.FtpClient ftpClient,string _path, bool check)
+        public MainForm(backend.FtpClient ftpClient,string _directory, bool check)
         {
             ftp = ftpClient;
-            path = _path;
-            Console.WriteLine(path);
-            ListFiles(path);
+            path = _directory;
+            ListFiles();
             Thread.Sleep(500);
-            ListFolders(path);
-            /*if (check)
-                btnReturn.Visible = true;
-            else
-                btnReturn.Visible = false;*/
+            ListFolders();
             InitializeComponent();
+            EnableReturn(false);
+        }
+
+        public void EnableReturn(bool check)
+        {
+            if (check)
+            {
+                btnReturn.Enabled = true;
+                count++;
+            }
+            else
+                btnReturn.Enabled = false;
+
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
@@ -49,7 +58,7 @@ namespace ClienteUI
             this.Close();
         }
 
-        private void ListFiles(string path)
+        private void ListFiles()
         {
             string list = ftp.List();
             if(!(list == "empty"))
@@ -102,7 +111,7 @@ namespace ClienteUI
             form.ShowDialog();
         }
 
-        private void ListFolders(string path)
+        private void ListFolders()
         {
             string list = ftp.ListDirectories();
             Console.WriteLine("list: " + list);
@@ -192,14 +201,25 @@ namespace ClienteUI
                     Controls.Remove(item);
                 }
             }
-            ListFiles(path);
-            ListFolders(path);           
+            ListFiles();
+            ListFolders();           
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
             form = new FolderNameForm(ftp);
             form.ShowDialog();
+            RefreshButtons();
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            ftp.ReturnDirectory();
+            count--;
+            if (count == 0)
+            {
+                EnableReturn(false);
+            }
             RefreshButtons();
         }
     }

@@ -66,6 +66,12 @@ namespace Classes
                             case "PASS":
                                 response = Password(arguments);
                                 break;
+                            case "DIR":
+                                response = AccessDirectory(arguments);
+                                break;
+                            case "RET":
+                                ReturnDirectory();
+                                break;
                             case "CWD":
                                 response = ChangeWorkingDirectory(arguments);
                                 break;
@@ -111,7 +117,7 @@ namespace Classes
                                 }
                                 else
                                 {
-                                    response = "Error!";
+                                    response = "Error! Files and/or Directories inside the folder!";
                                 }
                                 break;
                             case "DEL-F":
@@ -161,6 +167,7 @@ namespace Classes
         {
             _username = username;
             _currentDirectory = _currentDirectory + @"\" + username;
+            Console.WriteLine("primer vez: " + _currentDirectory);
         }
 
         private string Password(string password)
@@ -173,6 +180,40 @@ namespace Classes
             {
                 return "530 Not logged in";
             }
+        }
+
+        private string AccessDirectory(string directory)
+        {
+            _currentDirectory = _currentDirectory + @"\" + directory;
+            return "Changed Succesfully!";
+        }
+
+        private void ReturnDirectory()
+        {
+            int count = 0;
+            int count2 = 0;
+            string aux = "";
+            foreach (char d in _currentDirectory)
+            {
+                if (d == '\\')
+                {
+                    count++;
+                }
+            }
+            foreach(char d in _currentDirectory)
+            {
+                if(d == '\\')
+                {
+                    count2++;
+                }
+                if(count2 != count)
+                {
+                    aux += d;
+                    
+                }
+            }
+            _currentDirectory = aux;
+            Console.WriteLine("segunda vez: " + aux);
         }
 
         private string ChangeWorkingDirectory(string pathname)

@@ -136,5 +136,16 @@ namespace ClienteUI.backend
             return response;
         }
 
+        public void ReturnDirectory()
+        {
+            Send("RET");
+        }
+
+        public string AccessDirectory(string directory)
+        {
+            Send("DIR " + directory);
+            string response = manager.ReceivedData();
+            return response;
+        }
     }
 }

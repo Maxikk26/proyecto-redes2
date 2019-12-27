@@ -29,7 +29,18 @@ namespace ClienteUI
 
         private void btnAccess_Click(object sender, EventArgs e)
         {
-            second = new MainForm(ftp,folderName,true);
+            Console.WriteLine("Access Click");
+            string response = ftp.AccessDirectory(folderName);
+            string[] split = response.Split('!');
+            response = split[0];
+            Console.WriteLine("response Access: " + response);
+            if(response == "Changed Succesfully")
+            {
+                MessageBox.Show(response, "Access", MessageBoxButtons.OK);
+                main.RefreshButtons();
+                main.EnableReturn(true);
+            }
+            this.Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

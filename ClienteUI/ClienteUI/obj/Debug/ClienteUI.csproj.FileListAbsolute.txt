@@ -34,7 +34,6 @@ C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\Client
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.csprojAssemblyReference.cache
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.MainForm.resources
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.LoginForm.resources
-C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionForm.resources
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.Properties.Resources.resources
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.csproj.GenerateResource.cache
 C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.exe
@@ -43,3 +42,5 @@ C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\Client
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.FolderNameForm.resources
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionFormFile.resources
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionFormFolder.resources
+C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionFormFile.resources
+C:\Users\MAXSIO-2\Documents\00Maxi\Repositorios\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.OptionFormFolder.resources
