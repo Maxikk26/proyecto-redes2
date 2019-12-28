@@ -49,9 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ClientConnection.cs" />
-    <Compile Include="Classes\FileManager.cs" />
-    <Compile Include="Classes\FtpServer.cs" />
+    <Compile Include="Classes\AdaptadorFTP\ClientConnection.cs" />
+    <Compile Include="Classes\AdaptadorFTP\FileManager.cs" />
+    <Compile Include="Classes\AdaptadorFTP\FtpServer.cs" />
+    <Compile Include="Classes\ControlUsuarios\AdaptadorTXT.cs" />
+    <Compile Include="Classes\ControlUsuarios\ControlUsuarios.cs" />
+    <Compile Include="Classes\ControlUsuarios\Usuario.cs" />
     <Compile Include="Server.cs">
       <SubType>Form</SubType>
     </Compile>
