@@ -66,6 +66,15 @@ namespace ClienteUI.backend
             
         }
 
+        public void Rename(string newName, string oldName)
+        {
+            string msg = "REN " + oldName;
+            Send(msg);
+            Thread.Sleep(500);
+            msg = "REN " + newName;
+            Send(msg);
+        }
+
         public string ReceiveList()
         {
             byte[] buffer = new byte[1024];

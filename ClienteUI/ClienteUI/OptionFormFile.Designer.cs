@@ -32,11 +32,13 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.btnRename = new System.Windows.Forms.Button();
+            this.btnMove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDownload
             // 
-            this.btnDownload.Location = new System.Drawing.Point(31, 108);
+            this.btnDownload.Location = new System.Drawing.Point(12, 108);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(74, 33);
             this.btnDownload.TabIndex = 0;
@@ -46,7 +48,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(125, 108);
+            this.btnDelete.Location = new System.Drawing.Point(99, 108);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(74, 33);
             this.btnDelete.TabIndex = 1;
@@ -56,7 +58,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(224, 108);
+            this.btnCancel.Location = new System.Drawing.Point(380, 108);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(74, 33);
             this.btnCancel.TabIndex = 2;
@@ -74,16 +76,38 @@
             this.lblMessage.TabIndex = 4;
             this.lblMessage.Text = "What to do with the file?";
             // 
-            // OptionForm
+            // btnRename
+            // 
+            this.btnRename.Location = new System.Drawing.Point(193, 108);
+            this.btnRename.Name = "btnRename";
+            this.btnRename.Size = new System.Drawing.Size(74, 33);
+            this.btnRename.TabIndex = 5;
+            this.btnRename.Text = "Rename";
+            this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
+            // 
+            // btnMove
+            // 
+            this.btnMove.Location = new System.Drawing.Point(288, 108);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(74, 33);
+            this.btnMove.TabIndex = 6;
+            this.btnMove.Text = "Move";
+            this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            // 
+            // OptionFormFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 167);
+            this.ClientSize = new System.Drawing.Size(466, 167);
+            this.Controls.Add(this.btnMove);
+            this.Controls.Add(this.btnRename);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnDownload);
-            this.Name = "OptionForm";
+            this.Name = "OptionFormFile";
             this.Text = "OptionForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,5 +120,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Button btnRename;
+        private System.Windows.Forms.Button btnMove;
     }
 }

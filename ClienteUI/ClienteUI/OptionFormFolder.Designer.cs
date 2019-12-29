@@ -32,6 +32,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAccess = new System.Windows.Forms.Button();
+            this.btnRename = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMessage
@@ -46,7 +47,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(232, 96);
+            this.btnCancel.Location = new System.Drawing.Point(336, 96);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(74, 33);
             this.btnCancel.TabIndex = 7;
@@ -56,7 +57,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(133, 96);
+            this.btnDelete.Location = new System.Drawing.Point(135, 96);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(74, 33);
             this.btnDelete.TabIndex = 6;
@@ -74,11 +75,22 @@
             this.btnAccess.UseVisualStyleBackColor = true;
             this.btnAccess.Click += new System.EventHandler(this.btnAccess_Click);
             // 
+            // btnRename
+            // 
+            this.btnRename.Location = new System.Drawing.Point(236, 96);
+            this.btnRename.Name = "btnRename";
+            this.btnRename.Size = new System.Drawing.Size(74, 33);
+            this.btnRename.TabIndex = 9;
+            this.btnRename.Text = "Rename";
+            this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
+            // 
             // OptionFormFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(336, 156);
+            this.ClientSize = new System.Drawing.Size(427, 156);
+            this.Controls.Add(this.btnRename);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDelete);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAccess;
+        private System.Windows.Forms.Button btnRename;
     }
 }

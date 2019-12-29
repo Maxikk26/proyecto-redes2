@@ -48,3 +48,16 @@ C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.CopyComplete
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.Server.resources
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Forms.AddUser.resources
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.exe.config
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.exe
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\ServerPruebaUI.pdb
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\Microsoft.VisualBasic.PowerPacks.xml
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csprojAssemblyReference.cache
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Forms.AddUser.resources
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.AdminUsers.resources
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.Server.resources
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Properties.Resources.resources
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.GenerateResource.cache
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.CopyComplete
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.exe
+C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.pdb

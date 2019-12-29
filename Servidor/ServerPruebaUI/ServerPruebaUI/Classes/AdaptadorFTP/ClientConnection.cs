@@ -23,6 +23,8 @@ namespace Classes
 
         private string _currentDirectory = @"C:\server";
         private bool aux;
+        private bool ren = false;
+        private string oldName;
 
         private Server target;
         private FileManager manager;
@@ -136,6 +138,9 @@ namespace Classes
                             case "RET":
                                 ReturnDirectory();
                                 break;
+                            case "REN":
+                                Rename(arguments);
+                                break;
                             default:
                                 response = "502 Command not implemented";
                                 break;
@@ -189,6 +194,47 @@ namespace Classes
             }
             else
                 return "n!";
+        }
+
+        private void Rename(string arguments)
+        {
+            aux = false;
+            foreach(char d in arguments)
+            {
+                if (d == '.')
+                    aux = true;
+            }
+            if (aux)
+            {
+                if (!ren)
+                {
+                    ren = true;
+                    this.oldName = arguments;
+                }
+                else
+                {
+                    string directory = _currentDirectory + @"\" + oldName;
+                    File.Move(directory, _currentDirectory + @"\" + arguments);
+                    Console.WriteLine("rename " + directory);
+                    ren = false;
+                }
+            }
+            else
+            {
+                if (!ren)
+                {
+                    ren = true;
+                    this.oldName = arguments;
+                }
+                else
+                {
+                    string directory = _currentDirectory + @"\" + oldName;
+                    Directory.Move(directory, _currentDirectory + @"\" + arguments);
+                    Console.WriteLine("rename " + directory);
+                    ren = false;
+                }
+            }
+            
         }
 
         private string ChangeWorkingDirectory(string pathname)

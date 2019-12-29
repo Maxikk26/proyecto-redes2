@@ -17,7 +17,8 @@ namespace ClienteUI
         private string path = @"C:\server\";
         string response;
         private MainForm main;
-        private MainForm second;
+        private RenameForm form;
+
         public OptionFormFolder(string folder, backend.FtpClient ftpClient, MainForm form, string _path)
         {
             ftp = ftpClient;
@@ -53,6 +54,14 @@ namespace ClienteUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void btnRename_Click(object sender, EventArgs e)
+        {
+            form = new RenameForm("", folderName, ftp,true);
+            form.ShowDialog();
+            main.RefreshButtons();
             this.Close();
         }
     }
