@@ -55,11 +55,21 @@ namespace ClienteUI
                         string user = txtUser.Text;
                         string pass = txtPass.Text;
                         ftpClient = new backend.FtpClient(ip,port);
-                        ftpClient.Connect(user);
-                        main = new MainForm(ftpClient,user,false);
-                        main.Show();
-                        main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
-                        this.Hide();
+                        bool b1 = ftpClient.Connect(user,pass);
+                        if (b1)
+                        {
+                            main = new MainForm(ftpClient, user, false);
+                            main.Show();
+                            main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("User and/or password incorrect!!!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+
+
                     }
                     
                     
@@ -86,6 +96,11 @@ namespace ClienteUI
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Close();
+        }
+
+        private void txtPass_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

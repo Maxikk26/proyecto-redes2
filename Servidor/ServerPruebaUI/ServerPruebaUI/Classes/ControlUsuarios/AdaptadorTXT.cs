@@ -16,7 +16,7 @@ namespace ServerPruebaUI.Classes.ControlUsuarios
             this.path = path;
             if (!File.Exists(path))
             {
-                File.CreateText(path);
+                File.Create(path);
             }
         }
 
@@ -46,7 +46,7 @@ namespace ServerPruebaUI.Classes.ControlUsuarios
 
                     // using the method 
                     String[] strlist = str.Split(spearator, count,
-                           StringSplitOptions.RemoveEmptyEntries);
+                            StringSplitOptions.RemoveEmptyEntries);
 
                     usuarios.Add(new Usuario(strlist[0], strlist[1], strlist[2], strlist[3]));
                 }

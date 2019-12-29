@@ -161,7 +161,21 @@ namespace Classes
             try
             {
                 if (check)
+                {
+                    
+                    System.IO.DirectoryInfo di = new DirectoryInfo(currentDirectory + @"\" + name);
+
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    foreach (DirectoryInfo dir in di.GetDirectories())
+                    {
+                        dir.Delete(true);
+                    }
+
                     Directory.Delete(currentDirectory + @"\" + name);
+                }
                 else
                     File.Delete(currentDirectory + @"\" + name);
                 return true;

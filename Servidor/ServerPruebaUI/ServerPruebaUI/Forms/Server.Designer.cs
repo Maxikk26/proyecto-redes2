@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Server));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtIp = new System.Windows.Forms.TextBox();
@@ -35,6 +36,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtboxCmd = new System.Windows.Forms.RichTextBox();
             this.btnStop = new System.Windows.Forms.Button();
+            this.btnUsers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -101,11 +103,24 @@
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // Form1
+            // btnUsers
+            // 
+            this.btnUsers.AutoSize = true;
+            this.btnUsers.Image = ((System.Drawing.Image)(resources.GetObject("btnUsers.Image")));
+            this.btnUsers.Location = new System.Drawing.Point(575, 12);
+            this.btnUsers.Name = "btnUsers";
+            this.btnUsers.Size = new System.Drawing.Size(75, 70);
+            this.btnUsers.TabIndex = 7;
+            this.btnUsers.UseVisualStyleBackColor = true;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
+            // 
+            // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(662, 403);
+            this.Controls.Add(this.btnUsers);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.txtboxCmd);
             this.Controls.Add(this.button1);
@@ -113,8 +128,9 @@
             this.Controls.Add(this.txtIp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Server";
+            this.Text = "Settings";
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +145,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox txtboxCmd;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnUsers;
     }
 }
 

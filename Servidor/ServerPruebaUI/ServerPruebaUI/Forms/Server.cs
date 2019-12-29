@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
+using ServerPruebaUI;
 
 namespace ServerUI
 {
@@ -114,7 +115,22 @@ namespace ServerUI
             MessageBox.Show("Error", exc, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-       
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            AdminUsers adminUsers = new AdminUsers(ftp);
+            adminUsers.Show();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            AdminUsers adminUsers = new AdminUsers(ftp);
+            adminUsers.Show();
+        }
     }
 }
 

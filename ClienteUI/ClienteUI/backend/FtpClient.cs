@@ -29,7 +29,7 @@ namespace ClienteUI.backend
 
         }
 
-        public void Connect(string user)
+        public bool Connect(string user, string pass)
         {
             try
             {
@@ -39,24 +39,30 @@ namespace ClienteUI.backend
                 socket = client.Client;
                 manager = new FileManager(socket);
                 writer = new StreamWriter(stream);
-                string msg = "USER " + user;
-                Send(msg);
+
+                string response = Login(user, pass);
+                if (response == "y")
+                    return true;
+                else
+                    return false;
+              
             } 
             catch(ArgumentNullException e)
             {
                 Console.WriteLine("Exception: "+e.Message);
-                throw e;
+                return false;
             }
             catch (SocketException e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                throw e;
+                return false;
             }
             catch (ObjectDisposedException e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                throw e;
+                return false;
             }
+            
             
         }
 
@@ -75,6 +81,22 @@ namespace ClienteUI.backend
         {
             writer.WriteLine(message);
             writer.Flush();
+        }
+
+        public string Login(string user, string pass)
+        {
+            Console.WriteLine("LOGIN  " + user + " " + pass);
+
+            string msg = "USER " + user;
+            Send(msg);
+            Thread.Sleep(500);
+            msg = "PASS " + pass;
+            Send(msg);
+            string response = manager.ReceivedData();
+            string[] split = response.Split('!');
+            response = split[0];
+            Console.WriteLine("La rspuesta esss login " + response);
+            return response;
         }
 
         public string List()

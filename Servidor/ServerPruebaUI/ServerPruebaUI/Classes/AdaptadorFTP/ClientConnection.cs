@@ -8,6 +8,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using ServerUI;
+using ServerPruebaUI.Classes.ControlUsuarios;
 
 namespace Classes
 {
@@ -26,7 +27,9 @@ namespace Classes
         private Server target;
         private FileManager manager;
 
-        public ClientConnection(TcpClient client, Server f1)
+        public ControlUsuarios controlUsuarios;
+
+        public ClientConnection(TcpClient client, Server f1, ControlUsuarios controlUsuarios)
         {
             target = f1;
             _controlClient = client;
@@ -35,6 +38,8 @@ namespace Classes
             _controlReader = new StreamReader(_controlStream);
             _controlWriter = new StreamWriter(_controlStream);
             manager = new FileManager();
+
+            this.controlUsuarios = controlUsuarios;
         }
 
         public void HandleClient(Object obj)
@@ -125,6 +130,12 @@ namespace Classes
                                     response = "Error!";
                                 }
                                 break;
+                            case "DIR":
+                                response = AccessDirectory(arguments);
+                                break;
+                            case "RET":
+                                ReturnDirectory();
+                                break;
                             default:
                                 response = "502 Command not implemented";
                                 break;
@@ -160,19 +171,24 @@ namespace Classes
         private void User(string username)
         {
             _username = username;
-            _currentDirectory = _currentDirectory + @"\" + username;
+       
         }
 
         private string Password(string password)
         {
-            if (true)
+            Console.WriteLine("este es mamawebo " + _username + " " + password);
+            Console.WriteLine("SSScurrennn "+_currentDirectory);
+            bool check = controlUsuarios.loginUsuario(_username, password);
+            Console.WriteLine("bool check "+check);
+
+            if (check)
             {
-                return "230 User logged in";
+                _currentDirectory = _currentDirectory + @"\" + _username;
+                Console.WriteLine("RRRRRcurrennn " + _currentDirectory);
+                return "y!";
             }
             else
-            {
-                return "530 Not logged in";
-            }
+                return "n!";
         }
 
         private string ChangeWorkingDirectory(string pathname)
@@ -230,6 +246,40 @@ namespace Classes
         {
             bool check = manager.Delete(arguments, _currentDirectory,false);
             return check;
+        }
+
+        private string AccessDirectory(string directory)
+        {
+            _currentDirectory = _currentDirectory + @"\" + directory;
+            return "Changed Succesfully!";
+        }
+
+        private void ReturnDirectory()
+        {
+            int count = 0;
+            int count2 = 0;
+            string aux = "";
+            foreach (char d in _currentDirectory)
+            {
+                if (d == '\\')
+                {
+                    count++;
+                }
+            }
+            foreach (char d in _currentDirectory)
+            {
+                if (d == '\\')
+                {
+                    count2++;
+                }
+                if (count2 != count)
+                {
+                    aux += d;
+
+                }
+            }
+            _currentDirectory = aux;
+            Console.WriteLine("segunda vez: " + aux);
         }
 
         #endregion

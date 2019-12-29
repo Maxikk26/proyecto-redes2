@@ -17,10 +17,15 @@ namespace ServerPruebaUI.Classes.ControlUsuarios
             usuarios = adaptadorTXT.cargarUsuarios();
         }
 
-        public void crearUsuario(string login, string clave, string nombre, string apellido)
+        public bool crearUsuario(string login, string clave, string nombre, string apellido)
         {
-            if(!confirmarUsuario(login))
+            if (!confirmarUsuario(login))
+            {
                 usuarios.Add(new Usuario(login, clave, nombre, apellido));
+                return true;
+            }
+            else
+                return false;
         }
 
         public void eliminarUsuario(string login)
