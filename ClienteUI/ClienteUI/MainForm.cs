@@ -22,14 +22,27 @@ namespace ClienteUI
         private string path;
         private int count = 0;
 
+        public int itemsXFila = 3;
+        public int nextX = 0;
+        public int nextY = 0;
+
+        public string pathResouces;
+
         public MainForm(backend.FtpClient ftpClient,string _directory, bool check)
         {
+            InitializeComponent();
+
+            pathResouces = Directory.GetCurrentDirectory();
+            pathResouces = pathResouces.Replace(@"bin\Debug", @"Resources\");
+
             ftp = ftpClient;
             path = _directory;
-            ListFiles();
-            Thread.Sleep(500);
+            
             ListFolders();
-            InitializeComponent();
+            Thread.Sleep(500);
+            ListFiles();
+
+            
             EnableReturn(false);
         }
 
@@ -60,6 +73,8 @@ namespace ClienteUI
 
         private void ListFiles()
         {
+            Bitmap img = new Bitmap(pathResouces +  "file.png");
+
             string list = ftp.List();
             if(!(list == "empty"))
             {
@@ -88,15 +103,30 @@ namespace ClienteUI
                         string text = aux2[0];
                         Console.WriteLine("text: " + text);
                         Button button = new Button();
-                        button.Text = text;
+
+                        button.Image = img;
+                        button.AutoSize = true;
+                        button.TextAlign = ContentAlignment.BottomCenter;
+
+                        button.Text = aux2[0] + "." + aux2[1];
                         button.Name = aux;
-                        button.Left = left;
-                        button.Top = top;
+
+                        /* button.Left = left;
+                         button.Top = top;*/
+
+                        button.Location = new Point(nextX, nextY);
+                        nextX += 100;
+                        if (nextX > 100 * itemsXFila)
+                        {
+                            nextY += 100;
+                            nextX = 0;
+                        }
+
                         button.Click += (sender2, e2) => File_Click(sender2, e2, button);
                         this.Controls.Add(button);
                         buttonsAdded.Insert(0, button);
-                        top += button.Height + 2;
-                        aux = "";
+                       // top += button.Height + 2;
+                        aux = "";                       
                     }
 
                 }
@@ -113,6 +143,10 @@ namespace ClienteUI
 
         private void ListFolders()
         {
+            nextX = 0;
+            nextY = 0;
+            Bitmap img = new Bitmap(pathResouces + "folder.png");
+
             string list = ftp.ListDirectories();
             Console.WriteLine("list: " + list);
             if (!(list == "empty"))
@@ -141,14 +175,29 @@ namespace ClienteUI
                         {
                             count2 = 0;
                             Button button = new Button();
+
+                            button.Image = img;
+                            button.AutoSize = true;
+                            button.TextAlign = ContentAlignment.BottomCenter;
+
                             button.Text = aux;
                             button.Name = aux;
-                            button.Left = left;
-                            button.Top = top;
+
+                            /* button.Left = left;
+                             button.Top = top;*/
+
+                            button.Location = new Point(nextX, nextY);
+                            nextX += 100;
+                            if (nextX > 100 * itemsXFila)
+                            {
+                                nextY += 100;
+                                nextX = 0;
+                            }
+
                             button.Click += (sender2, e2) => Folder_Click(sender2, e2, button);
                             this.Controls.Add(button);
                             buttonsAdded.Insert(0, button);
-                            top += button.Height + 2;
+                            //top += button.Height + 2;
                             aux = "";
                             count2 = 0;
                         }
@@ -221,6 +270,11 @@ namespace ClienteUI
                 EnableReturn(false);
             }
             RefreshButtons();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 
