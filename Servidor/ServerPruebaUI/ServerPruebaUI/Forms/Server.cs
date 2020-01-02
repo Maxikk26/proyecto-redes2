@@ -10,14 +10,17 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
 using ServerPruebaUI;
+using Classes;
+using ServerPruebaUI.Classes.ControlUsuarios;
 
 namespace ServerUI
 {
     public partial class Server : Form
     {
         private int count = 0;
-        private Classes.FtpServer ftp;
-        private Classes.FileManager file;
+        private FtpServer ftp;
+        private FileManager file;
+        private ControlUsuarios controlUsuarios;
 
         private string path = @"C:\server";
         
@@ -25,12 +28,16 @@ namespace ServerUI
         {
             InitializeComponent();
             btnStop.Enabled = false;
-            ftp = new Classes.FtpServer(this);
-            
+            AdaptadorTXT adaptadorTXT = new AdaptadorTXT(@"C:\server\usuarios.txt");
+            controlUsuarios = new ControlUsuarios(adaptadorTXT);
+            file = new FileManager();
+            ftp = new FtpServer(this, controlUsuarios, file);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            
+
             string txtip = txtIp.Text;
             string txtport = txtPort.Text;
             Int32 port = 0;
@@ -49,6 +56,7 @@ namespace ServerUI
                 else
                     putText(path + " created!");
 
+                btnUsers.Enabled = false;
             }
             catch (FormatException Ex)
             {
@@ -73,6 +81,8 @@ namespace ServerUI
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            btnUsers.Enabled = true;
+
             btnStop.Enabled = true;
             putText("Stopping Server...");
             ftp.Stop();
@@ -117,7 +127,7 @@ namespace ServerUI
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            AdminUsers adminUsers = new AdminUsers(ftp);
+            AdminUsers adminUsers = new AdminUsers(controlUsuarios,file);
             adminUsers.Show();
         }
 
@@ -128,7 +138,7 @@ namespace ServerUI
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            AdminUsers adminUsers = new AdminUsers(ftp);
+            AdminUsers adminUsers = new AdminUsers(controlUsuarios,file);
             adminUsers.Show();
         }
     }

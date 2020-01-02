@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace ServerPruebaUI.Classes.ControlUsuarios
 {
-    class AdaptadorTXT
+    public class AdaptadorTXT
     {
         public string path;
+        public StreamWriter file;
 
         public AdaptadorTXT(string path)
         {
             this.path = path;
             if (!File.Exists(path))
             {
-                File.Create(path);
-            }
+                file = File.CreateText(path);
+                file.Close();
+            }         
         }
 
         public void salvarUsuarios(List<Usuario> usuarios)

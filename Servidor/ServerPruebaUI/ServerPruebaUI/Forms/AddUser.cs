@@ -1,4 +1,5 @@
 ﻿using Classes;
+using ServerPruebaUI.Classes.ControlUsuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,16 @@ namespace ServerPruebaUI.Forms
 {
     public partial class AddUser : Form
     {
-        DataGridView dtgvUsers;
-        FtpServer ftp;
-        public AddUser(FtpServer ftp,DataGridView dtgvUsers)
+        public DataGridView dtgvUsers;
+        public ControlUsuarios controlUsuarios;
+        public FileManager file;
+
+        public AddUser(ControlUsuarios controlUsuarios, FileManager file, DataGridView dtgvUsers)
         {
             InitializeComponent();
             this.dtgvUsers = dtgvUsers;
-            this.ftp = ftp;
+            this.controlUsuarios = controlUsuarios;
+            this.file = file;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -45,8 +49,11 @@ namespace ServerPruebaUI.Forms
         private void btnRegistar_Click(object sender, EventArgs e)
         {
             
-            if(ftp.createUser(txtLogin.Text, txtClave.Text, txtNombre.Text, txtApellido.Text))
+            if(controlUsuarios.crearUsuario(txtLogin.Text, txtClave.Text, txtNombre.Text, txtApellido.Text))
             {
+                file.CreateFolder(txtLogin.Text, @"C:\server");
+                controlUsuarios.salvarUsuarios();
+
                 int n = dtgvUsers.Rows.Add();
 
                 dtgvUsers.Rows[n].Cells[0].Value = txtLogin.Text;

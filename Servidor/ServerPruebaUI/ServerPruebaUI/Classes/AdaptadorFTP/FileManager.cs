@@ -12,10 +12,10 @@ using System.Net;
 
 namespace Classes
 {
-    class FileManager
+    public class FileManager
     {
-        private string path = @"C:\server\";
-        private string fullPath;
+        public string path = @"C:\server\";
+        public string fullPath;
 
         public FileManager()
         {
@@ -201,6 +201,11 @@ namespace Classes
                 return false;
             }
         }
-        
+
+        public void Rename(string oldName, string newName)
+        {
+            if(Directory.Exists(oldName) && oldName != newName)
+                Directory.Move(oldName, newName);
+        }
     }
 }

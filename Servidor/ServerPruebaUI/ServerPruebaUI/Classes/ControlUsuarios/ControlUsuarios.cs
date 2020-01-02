@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerPruebaUI.Classes.ControlUsuarios
 {
-    class ControlUsuarios
+    public class ControlUsuarios
     {
         AdaptadorTXT adaptadorTXT;
         public List<Usuario> usuarios;
@@ -62,11 +62,12 @@ namespace ServerPruebaUI.Classes.ControlUsuarios
 
         public bool loginUsuario(string login, string clave)
         {
-            foreach(Usuario usuario in usuarios)
-            {
-                if (usuario.login == login && usuario.clave == clave)
-                    return true;
-            }
+            if (usuarios != null)
+                foreach(Usuario usuario in usuarios)
+                {
+                    if (usuario.login == login && usuario.clave == clave)
+                        return true;
+                }
             return false;
         }
 

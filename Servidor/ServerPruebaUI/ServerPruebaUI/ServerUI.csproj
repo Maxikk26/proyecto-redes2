@@ -69,6 +69,12 @@
     <Compile Include="Classes\ControlUsuarios\AdaptadorTXT.cs" />
     <Compile Include="Classes\ControlUsuarios\ControlUsuarios.cs" />
     <Compile Include="Classes\ControlUsuarios\Usuario.cs" />
+    <Compile Include="Forms\ModUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModUser.Designer.cs">
+      <DependentUpon>ModUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminUsers.resx">
       <DependentUpon>AdminUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModUser.resx">
+      <DependentUpon>ModUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Server.resx">
       <DependentUpon>Server.cs</DependentUpon>

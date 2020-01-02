@@ -12,22 +12,22 @@ using ServerPruebaUI.Classes.ControlUsuarios;
 
 namespace Classes
 {
-    class ClientConnection
+    public class ClientConnection
     {
-        private TcpClient _controlClient;
-        private NetworkStream _controlStream;
-        private StreamReader _controlReader;
-        private StreamWriter _controlWriter;
-        private Socket socket;
-        private string _username;
+        public TcpClient _controlClient;
+        public NetworkStream _controlStream;
+        public StreamReader _controlReader;
+        public StreamWriter _controlWriter;
+        public Socket socket;
+        public string _username;
 
-        private string _currentDirectory = @"C:\server";
-        private bool aux;
-        private bool ren = false;
-        private string oldName;
+        public string _currentDirectory = @"C:\server";
+        public bool aux;
+        public bool ren = false;
+        public string oldName;
 
-        private Server target;
-        private FileManager manager;
+        public Server target;
+        public FileManager manager;
 
         public ControlUsuarios controlUsuarios;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerPruebaUI.Classes.ControlUsuarios
 {
-    class Usuario
+    public class Usuario
     {
         public string nombre;
         public string apellido;
@@ -14,7 +14,7 @@ namespace ServerPruebaUI.Classes.ControlUsuarios
         public string clave;
         public Usuario(string login, string clave, string nombre, string apellido)
         {
-            this.nombre =nombre;
+            this.nombre = nombre;
             this.apellido = apellido;
             this.login = login;
             this.clave = clave;

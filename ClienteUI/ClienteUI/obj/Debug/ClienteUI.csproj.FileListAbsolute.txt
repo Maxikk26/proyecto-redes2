@@ -61,3 +61,5 @@ C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\ClienteUI\ClienteUI\obj\Deb
 C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.exe
 C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.pdb
 C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.RenameForm.resources
+C:\Users\ezequ\Documents\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.RenameForm.resources
+C:\Users\ezequ\Documents\proyecto-redes2\ClienteUI\ClienteUI\obj\Debug\ClienteUI.TreeForm.resources

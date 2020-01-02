@@ -15,8 +15,6 @@ namespace ServerUI
         [STAThread]
         static void Main()
         {
-            
-
             Control.CheckForIllegalCrossThreadCalls = false;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -1,4 +1,5 @@
 ﻿using Classes;
+using ServerPruebaUI.Classes.ControlUsuarios;
 using ServerPruebaUI.Forms;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,29 @@ namespace ServerPruebaUI
 {
     public partial class AdminUsers : Form
     {
-        public FtpServer ftp;
+        public ControlUsuarios controlUsuarios;
+        public FileManager file;
 
-        public AdminUsers(FtpServer ftp)
+        public AdminUsers(ControlUsuarios controlUsuarios, FileManager file)
         {
             InitializeComponent();
-            this.ftp = ftp;
+            this.controlUsuarios = controlUsuarios;
+            this.file = file;
+            cargarUsuarios();
+        }
 
-            ftp.cargarUsuarios(this);
+        public void cargarUsuarios()
+        {
+            if (controlUsuarios.usuarios != null)
+                foreach (Usuario u in controlUsuarios.usuarios)
+                {
+                    int n = dtgvUsers.Rows.Add();
+
+                    dtgvUsers.Rows[n].Cells[0].Value = u.login;
+                    dtgvUsers.Rows[n].Cells[1].Value = u.clave;
+                    dtgvUsers.Rows[n].Cells[2].Value = u.nombre;
+                    dtgvUsers.Rows[n].Cells[3].Value = u.apellido;
+                }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -42,7 +58,7 @@ namespace ServerPruebaUI
         private void btnAddUser_Click(object sender, EventArgs e)
         {
             btnDelUser.Enabled = true;
-            AddUser addUser = new AddUser(ftp ,dtgvUsers);
+            AddUser addUser = new AddUser(controlUsuarios, file, dtgvUsers);
             addUser.Show();
         }
 
@@ -57,8 +73,9 @@ namespace ServerPruebaUI
                   
                     rowsToDelete.Add(cell.RowIndex);
 
-                    ftp.eliminarUser(dtgvUsers.Rows[cell.RowIndex].Cells[0].Value.ToString());
-                    
+                    controlUsuarios.eliminarUsuario(dtgvUsers.Rows[cell.RowIndex].Cells[0].Value.ToString());
+                    controlUsuarios.salvarUsuarios();
+                    file.Delete(dtgvUsers.Rows[cell.RowIndex].Cells[0].Value.ToString(), @"C:\server", true);                    
                 }
             }
             rowsToDelete = rowsToDelete.OrderByDescending(rowIndex => rowIndex).ToList();
@@ -74,6 +91,12 @@ namespace ServerPruebaUI
             }
 
             rowsToDelete.Clear();
+        }
+
+        private void btnModUser_Click(object sender, EventArgs e)
+        {
+            ModUser modUser = new ModUser(controlUsuarios, dtgvUsers, this, file);
+            modUser.Show();
         }
     }
 }
