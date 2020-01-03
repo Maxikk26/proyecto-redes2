@@ -46,7 +46,7 @@ namespace ServerUI
 
                 port = System.Convert.ToInt32(txtport);
                 ftp.Start(txtip,port);
-                button1.Enabled = false;
+                btnStart.Enabled = false;
                 btnStop.Enabled = true;
                 putText("Starting server on port "+port);
                 file = new Classes.FileManager();
@@ -61,14 +61,14 @@ namespace ServerUI
             catch (FormatException Ex)
             {
                 MessageBox.Show(Ex.Message, "FormatException", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button1.Enabled = true;
+                btnStart.Enabled = true;
                 btnStop.Enabled = false;
 
             }
             catch (OverflowException Ex)
             {
                 MessageBox.Show(Ex.Message, "OverflowException", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button1.Enabled = true;
+                btnStart.Enabled = true;
                 btnStop.Enabled = false;
 
             }
@@ -82,11 +82,12 @@ namespace ServerUI
         private void btnStop_Click(object sender, EventArgs e)
         {
             btnUsers.Enabled = true;
+            btnStart.Enabled = true;
 
-            btnStop.Enabled = true;
+            btnStop.Enabled = false;
             putText("Stopping Server...");
             ftp.Stop();
-            
+          
         }
 
         public void putText(string str)

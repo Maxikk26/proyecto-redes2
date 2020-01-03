@@ -29,7 +29,13 @@ namespace ClienteUI.backend
 
         }
 
-        public bool Connect(string user, string pass)
+        public void Disconnect()
+        {
+            client.GetStream().Close();
+            client.Close();
+        }
+
+        public string Connect(string user, string pass)
         {
             try
             {
@@ -42,25 +48,26 @@ namespace ClienteUI.backend
 
                 string response = Login(user, pass);
                 if (response == "y")
-                    return true;
-                else
-                    return false;
-              
+                    return "y";
+                else if (response == "n")
+                    return "n";
+
+                return "nada...";
             } 
             catch(ArgumentNullException e)
             {
                 Console.WriteLine("Exception: "+e.Message);
-                return false;
+                return e.Message;
             }
             catch (SocketException e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                return false;
+                return e.Message;
             }
             catch (ObjectDisposedException e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                return false;
+                return e.Message;
             }
             
             

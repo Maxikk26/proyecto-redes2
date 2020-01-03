@@ -110,7 +110,7 @@
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnDisconnect);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "NubeUCAB";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

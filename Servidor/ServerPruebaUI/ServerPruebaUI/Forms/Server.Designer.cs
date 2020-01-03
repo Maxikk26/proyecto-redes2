@@ -33,7 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtIp = new System.Windows.Forms.TextBox();
             this.txtPort = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.txtboxCmd = new System.Windows.Forms.RichTextBox();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
@@ -71,15 +71,15 @@
             this.txtPort.Size = new System.Drawing.Size(154, 20);
             this.txtPort.TabIndex = 3;
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(387, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.Location = new System.Drawing.Point(387, 54);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(89, 23);
+            this.btnStart.TabIndex = 4;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // txtboxCmd
             // 
@@ -123,7 +123,7 @@
             this.Controls.Add(this.btnUsers);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.txtboxCmd);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtIp);
             this.Controls.Add(this.label2);
@@ -142,7 +142,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtIp;
         private System.Windows.Forms.TextBox txtPort;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.RichTextBox txtboxCmd;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnUsers;

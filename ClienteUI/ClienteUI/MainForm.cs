@@ -63,6 +63,7 @@ namespace ClienteUI
             login = new LoginForm();
             login.Show();
             login.FormClosed += new FormClosedEventHandler(MainForm_FormClosed);
+            ftp.Disconnect();
             this.Hide();
         }
 

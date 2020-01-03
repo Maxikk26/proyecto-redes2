@@ -55,19 +55,35 @@ namespace ClienteUI
                         string user = txtUser.Text;
                         string pass = txtPass.Text;
                         ftpClient = new backend.FtpClient(ip,port);
-                        bool b1 = ftpClient.Connect(user,pass);
-                        if (b1)
+                        string b1 = ftpClient.Connect(user,pass);
+                        /*    if (b1 == "y")
+                            {
+                                main = new MainForm(ftpClient, user, false);
+                                main.Show();
+                                main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
+                                this.Hide();
+                            }
+                            else if(b1 == "n")
+                            {
+                                MessageBox.Show("User and/or password incorrect!!!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            */
+                        Console.WriteLine("B11111111111   " + b1);
+                        switch (b1)
                         {
-                            main = new MainForm(ftpClient, user, false);
-                            main.Show();
-                            main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
-                            this.Hide();
+                            case "y":
+                                main = new MainForm(ftpClient, user, false);
+                                main.Show();
+                                main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
+                                this.Hide();
+                                break;
+                            case "n":
+                                MessageBox.Show("User and/or password incorrect!!!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            default:
+                                MessageBox.Show(b1, "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
                         }
-                        else
-                        {
-                            MessageBox.Show("User and/or password incorrect!!!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-
 
 
                     }

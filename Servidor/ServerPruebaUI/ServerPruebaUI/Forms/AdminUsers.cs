@@ -68,7 +68,7 @@ namespace ServerPruebaUI
 
             foreach (DataGridViewCell cell in this.dtgvUsers.SelectedCells)
             {
-                if (rowsToDelete.Contains(cell.RowIndex) == false)
+                if (rowsToDelete.Contains(cell.RowIndex) == false && dtgvUsers.RowCount > 1)
                 {
                   
                     rowsToDelete.Add(cell.RowIndex);

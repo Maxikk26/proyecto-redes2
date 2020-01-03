@@ -19,7 +19,13 @@ namespace Classes
         public Server target;
         public FileManager file;
 
+        public TcpClient client;
+
         public ControlUsuarios controlUsuarios;
+
+        ClientConnection connection;
+
+        public bool b1 = true;
 
         public FtpServer(Server f1, ControlUsuarios controlUsuarios, FileManager file)
         {
@@ -30,6 +36,7 @@ namespace Classes
 
         public void Start(String ip, Int32 port)
         {
+            b1 = true;
             IPAddress IP = IPAddress.Parse(ip);
             _listener = new TcpListener(IP, port);
             _listener.Start();
@@ -38,21 +45,34 @@ namespace Classes
 
         public void Stop()
         {
+          
             if (_listener != null)
             {
+                Console.WriteLine("STOPPPP");
+                b1 = false;
                 _listener.Stop();
             }
+            else
+                Console.WriteLine("NOT STOPPP");
         }
 
         private void HandleAcceptTcpClient(IAsyncResult result)
         {
-            _listener.BeginAcceptTcpClient(HandleAcceptTcpClient, _listener);
-            TcpClient client = _listener.EndAcceptTcpClient(result);
-            EndPoint ep = client.Client.RemoteEndPoint;
-            target.putText("Incoming Connection..." + ep.ToString());
-            target.takeCount(true);
-            ClientConnection connection = new ClientConnection(client,target,controlUsuarios);
-            ThreadPool.QueueUserWorkItem(connection.HandleClient, client);
+
+
+            if (b1)
+            {
+                _listener.BeginAcceptTcpClient(HandleAcceptTcpClient, _listener);
+                client = _listener.EndAcceptTcpClient(result);
+                EndPoint ep = client.Client.RemoteEndPoint;
+                target.putText("Incoming Connection..." + ep.ToString());
+                target.takeCount(true);
+                connection = new ClientConnection(client, target, controlUsuarios);
+                ThreadPool.QueueUserWorkItem(connection.HandleClient, client);
+            }
+            
+            
+            
         }
     }
 }

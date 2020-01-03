@@ -31,6 +31,7 @@ namespace Classes
 
         public ControlUsuarios controlUsuarios;
 
+
         public ClientConnection(TcpClient client, Server f1, ControlUsuarios controlUsuarios)
         {
             target = f1;
@@ -48,118 +49,122 @@ namespace Classes
         {
             //_controlWriter.WriteLine("220 Service Ready.");
             //_controlWriter.Flush();
-            string line;
+            string line = "";
+          
             try
             {
-                while (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
-                {
-                    string response = null;
 
-                    string[] command = line.Split(' ');
-
-                    string cmd = command[0].ToUpperInvariant();
-                    string arguments = command.Length > 1 ? line.Substring(command[0].Length + 1) : null;
-
-                    if (string.IsNullOrWhiteSpace(arguments))
-                        arguments = null;
-
-                    if (response == null)
+                    while (!string.IsNullOrEmpty(line = _controlReader.ReadLine()))
                     {
-                        switch (cmd)
+                        string response = null;
+
+                        string[] command = line.Split(' ');
+
+                        string cmd = command[0].ToUpperInvariant();
+                        string arguments = command.Length > 1 ? line.Substring(command[0].Length + 1) : null;
+
+                        if (string.IsNullOrWhiteSpace(arguments))
+                            arguments = null;
+
+                        if (response == null)
                         {
-                            case "USER":
-                                User(arguments);
-                                break;
-                            case "PASS":
-                                response = Password(arguments);
-                                break;
-                            case "CWD":
-                                response = ChangeWorkingDirectory(arguments);
-                                break;
-                            case "CDUP":
-                                response = ChangeWorkingDirectory("..");
-                                break;
-                            case "PWD":
-                                response = "257 \"/\" is current directory.";
-                                break;
-                            case "QUIT":
-                                response = "Closing connection...";
-                                Close();
-                                break;
-                            case "LIST-F":
-                                List();
-                                break;
-                            case "DOWN":
-                                //Console.WriteLine("arguments: " + arguments);
-                                Download(arguments);
-                                break;
-                            case "UP":
-                                Upload();
-                                break;
-                            case "CRT":
-                                aux = CreateFolder(arguments);
-                                if (aux)
-                                {
-                                    response = "Created Successfully!";
-                                }
-                                else
-                                {
-                                    response = "Already Exists!";
-                                }
-                                break;
-                            case "LIST-D":
-                                ListDirectories();
-                                break;
-                            case "DEL-D":
-                                aux = Delete(arguments);
-                                if (aux)
-                                {
-                                    response = "Deleted Successfully!";
-                                }
-                                else
-                                {
-                                    response = "Error!";
-                                }
-                                break;
-                            case "DEL-F":
-                                aux = DeleteFile(arguments);
-                                if (aux)
-                                {
-                                    response = "Deleted Successfully!";
-                                }
-                                else
-                                {
-                                    response = "Error!";
-                                }
-                                break;
-                            case "DIR":
-                                response = AccessDirectory(arguments);
-                                break;
-                            case "RET":
-                                ReturnDirectory();
-                                break;
-                            case "REN":
-                                Rename(arguments);
-                                break;
-                            default:
-                                response = "502 Command not implemented";
-                                break;
+                            switch (cmd)
+                            {
+                                case "USER":
+                                    User(arguments);
+                                    break;
+                                case "PASS":
+                                    response = Password(arguments);
+                                    break;
+                                case "CWD":
+                                    response = ChangeWorkingDirectory(arguments);
+                                    break;
+                                case "CDUP":
+                                    response = ChangeWorkingDirectory("..");
+                                    break;
+                                case "PWD":
+                                    response = "257 \"/\" is current directory.";
+                                    break;
+                                case "QUIT":
+                                    response = "Closing connection...";
+                                    Close();
+                                    break;
+                                case "LIST-F":
+                                    List();
+                                    break;
+                                case "DOWN":
+                                    //Console.WriteLine("arguments: " + arguments);
+                                    Download(arguments);
+                                    break;
+                                case "UP":
+                                    Upload();
+                                    break;
+                                case "CRT":
+                                    aux = CreateFolder(arguments);
+                                    if (aux)
+                                    {
+                                        response = "Created Successfully!";
+                                    }
+                                    else
+                                    {
+                                        response = "Already Exists!";
+                                    }
+                                    break;
+                                case "LIST-D":
+                                    ListDirectories();
+                                    break;
+                                case "DEL-D":
+                                    aux = Delete(arguments);
+                                    if (aux)
+                                    {
+                                        response = "Deleted Successfully!";
+                                    }
+                                    else
+                                    {
+                                        response = "Error!";
+                                    }
+                                    break;
+                                case "DEL-F":
+                                    aux = DeleteFile(arguments);
+                                    if (aux)
+                                    {
+                                        response = "Deleted Successfully!";
+                                    }
+                                    else
+                                    {
+                                        response = "Error!";
+                                    }
+                                    break;
+                                case "DIR":
+                                    response = AccessDirectory(arguments);
+                                    break;
+                                case "RET":
+                                    ReturnDirectory();
+                                    break;
+                                case "REN":
+                                    Rename(arguments);
+                                    break;
+                                default:
+                                    response = "502 Command not implemented";
+                                    break;
+                            }
                         }
-                    }
 
-                    if (_controlClient == null || !_controlClient.Connected)
-                    {
-                        break;
-                    }
-                    else if (!(String.IsNullOrEmpty(response)))
-                    {
-                        //Console.WriteLine("response: " + response);
-                        _controlWriter.Write(response);
-                        _controlWriter.Flush();
-                    }
+                        if (_controlClient == null || !_controlClient.Connected)
+                        {
+                            break;
+                        }
+                        else if (!(String.IsNullOrEmpty(response)))
+                        {
+                            //Console.WriteLine("response: " + response);
+                            _controlWriter.Write(response);
+                            _controlWriter.Flush();
+                        }
 
-                }
-            } catch (FileNotFoundException ex)
+                    }
+                
+            }
+            catch (FileNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;
@@ -169,6 +174,7 @@ namespace Classes
                 Console.WriteLine(ex);
                 throw;
             }
+            
         }
 
         #region FTP Commands
