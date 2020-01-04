@@ -41,7 +41,6 @@ namespace ClienteUI
             main.RefreshButtons();
             MessageBox.Show("Deleted succesfuly!", "Download", MessageBoxButtons.OK);
             this.Close();
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -71,7 +70,8 @@ namespace ClienteUI
 
         private void btnMove_Click(object sender, EventArgs e)
         {
-
+            MoverForm moverForm = new MoverForm(ftp, fileName);
+            moverForm.Show();
         }
     }
 }

@@ -144,6 +144,9 @@ namespace Classes
                                 case "REN":
                                     Rename(arguments);
                                     break;
+                                case "MOV":
+                                response = Move(arguments);
+                                break;
                                 default:
                                     response = "502 Command not implemented";
                                     break;
@@ -332,6 +335,21 @@ namespace Classes
             }
             _currentDirectory = aux;
             Console.WriteLine("segunda vez: " + aux);
+        }
+
+        public string Move(string newPath)
+        {
+            try
+            {
+                string fileName = Path.GetFileName(newPath);
+                File.Move(_currentDirectory + @"\" + fileName, newPath);
+
+                return "moved succesfully!";
+            }
+            catch (Exception e)
+            {
+                return "error fatal!";
+            }
         }
 
         #endregion

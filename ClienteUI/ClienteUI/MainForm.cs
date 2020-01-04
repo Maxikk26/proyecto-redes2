@@ -117,7 +117,7 @@ namespace ClienteUI
 
                         button.Location = new Point(nextX, nextY);
                         nextX += 100;
-                        if (nextX > 100 * itemsXFila)
+                        if (nextX == 100 * itemsXFila)
                         {
                             nextY += 100;
                             nextX = 0;
@@ -189,7 +189,7 @@ namespace ClienteUI
 
                             button.Location = new Point(nextX, nextY);
                             nextX += 100;
-                            if (nextX > 100 * itemsXFila)
+                            if (nextX == 100 * itemsXFila)
                             {
                                 nextY += 100;
                                 nextX = 0;
@@ -251,8 +251,8 @@ namespace ClienteUI
                     Controls.Remove(item);
                 }
             }
-            ListFiles();
-            ListFolders();           
+            ListFolders();
+            ListFiles();                      
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

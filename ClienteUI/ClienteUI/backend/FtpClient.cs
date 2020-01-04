@@ -185,5 +185,12 @@ namespace ClienteUI.backend
             string response = manager.ReceivedData();
             return response;
         }
+
+        public string Move(string oldPath, string fileName)
+        {
+            Send("MOV " + oldPath + @"\" + fileName);
+            string response = manager.ReceivedData();
+            return response;
+        }
     }
 }
