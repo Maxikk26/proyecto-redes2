@@ -102,19 +102,14 @@ namespace ClienteUI
                     {
                         string[] aux2 = aux.Split('.');
                         string text = aux2[0];
-                        Console.WriteLine("text: " + text);
+                        //Console.WriteLine("text: " + text);
                         Button button = new Button();
-
                         button.Image = img;
                         button.AutoSize = true;
                         button.TextAlign = ContentAlignment.BottomCenter;
 
                         button.Text = aux2[0] + "." + aux2[1];
                         button.Name = aux;
-
-                        /* button.Left = left;
-                         button.Top = top;*/
-
                         button.Location = new Point(nextX, nextY);
                         nextX += 100;
                         if (nextX == 100 * itemsXFila)
@@ -126,7 +121,6 @@ namespace ClienteUI
                         button.Click += (sender2, e2) => File_Click(sender2, e2, button);
                         this.Controls.Add(button);
                         buttonsAdded.Insert(0, button);
-                       // top += button.Height + 2;
                         aux = "";                       
                     }
 
@@ -137,7 +131,7 @@ namespace ClienteUI
         }
         private void File_Click(object sender, EventArgs e, Button button)
         {
-            Console.WriteLine("button.Name: "+button.Name);
+            //Console.WriteLine("button.Name: "+button.Name);
             OptionFormFile form = new OptionFormFile(button.Name,ftp,this,path);
             form.ShowDialog();
         }
@@ -147,9 +141,8 @@ namespace ClienteUI
             nextX = 0;
             nextY = 0;
             Bitmap img = new Bitmap(pathResouces + "folder.png");
-
             string list = ftp.ListDirectories();
-            Console.WriteLine("list: " + list);
+            //Console.WriteLine("list: " + list);
             if (!(list == "empty"))
             {
                 int count = 0;
@@ -183,10 +176,6 @@ namespace ClienteUI
 
                             button.Text = aux;
                             button.Name = aux;
-
-                            /* button.Left = left;
-                             button.Top = top;*/
-
                             button.Location = new Point(nextX, nextY);
                             nextX += 100;
                             if (nextX == 100 * itemsXFila)
@@ -198,7 +187,6 @@ namespace ClienteUI
                             button.Click += (sender2, e2) => Folder_Click(sender2, e2, button);
                             this.Controls.Add(button);
                             buttonsAdded.Insert(0, button);
-                            //top += button.Height + 2;
                             aux = "";
                             count2 = 0;
                         }
@@ -218,7 +206,7 @@ namespace ClienteUI
 
         private void Folder_Click(object sender, EventArgs e, Button button)
         {
-            Console.WriteLine("button.Name: " + button.Name);
+            //Console.WriteLine("button.Name: " + button.Name);
             OptionFormFolder form = new OptionFormFolder(button.Name, ftp, this,path);
             form.ShowDialog();
         }

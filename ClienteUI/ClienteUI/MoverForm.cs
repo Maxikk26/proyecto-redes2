@@ -22,12 +22,16 @@ namespace ClienteUI
         public int nextY = 0;
         public string pathResouces;
         public int itemsXFila = 4;
+        private MainForm main;
+        private OptionFormFile file;
 
-        public MoverForm(FtpClient ftp, string fileName)
+        public MoverForm(FtpClient ftp, string fileName, MainForm main, OptionFormFile file)
         {
             InitializeComponent();
             this.ftp = ftp;
             this.fileName = fileName;
+            this.main = main;
+            this.file = file;
 
             pathResouces = Directory.GetCurrentDirectory();
             pathResouces = pathResouces.Replace(@"bin\Debug", @"Resources\");
@@ -43,6 +47,8 @@ namespace ClienteUI
             string Plist = auxlist[0];
 
             Plist = Directory.GetParent(Plist).ToString();
+            string plist = Directory.GetParent(Plist).ToString();
+            //Console.WriteLine("plist: " + plist);
 
             nextX = 0;
             nextY = 0;
@@ -75,11 +81,7 @@ namespace ClienteUI
                     button.TextAlign = ContentAlignment.BottomCenter;
 
                     button.Text = name;
-                    button.Name = Plist;
-
-                    /* button.Left = left;
-                     button.Top = top;*/
-
+                    button.Name = plist;
                     button.Location = new Point(nextX, nextY);
                     nextX += 100;
                     if (nextX > 100 * itemsXFila)
@@ -116,11 +118,8 @@ namespace ClienteUI
                             button.TextAlign = ContentAlignment.BottomCenter;
 
                             button.Text = aux;
-                            button.Name = aux;
-
-                            /* button.Left = left;
-                             button.Top = top;*/
-
+                            button.Name = Plist+ @"\"+aux;
+                            //Console.WriteLine("otro boton: " + button.Name);
                             button.Location = new Point(nextX, nextY);
                             nextX += 100;
                             if (nextX > 100 * itemsXFila)
@@ -131,7 +130,6 @@ namespace ClienteUI
 
                             button.Click += (sender2, e2) => Folder_Click(sender2, e2, button);
                             this.Controls.Add(button);
-                            //top += button.Height + 2;
                             aux = "";
                             count2 = 0;
                         }
@@ -151,8 +149,12 @@ namespace ClienteUI
 
         public void Folder_Click(object sender, EventArgs e, Button button)
         {
+            //Console.WriteLine("button.Name move: " + button.Name);
             string response = ftp.Move(button.Name, fileName);
             MessageBox.Show(response.Split('!')[0], "Moved", MessageBoxButtons.OK);
+            main.RefreshButtons();
+            file.Close();
+            this.Close();
         }
     }
 }

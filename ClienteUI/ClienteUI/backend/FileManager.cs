@@ -11,12 +11,7 @@ namespace ClienteUI.backend
 {
     public class FileManager
     {
-        private TcpClient _controlClient;
-        private NetworkStream _controlStream;
-        private StreamReader _controlReader;
-        private StreamWriter _controlWriter;
         private Socket socket;
-        private string fullPath;
         private string path = @"C:\pruebas";
 
         public FileManager(Socket _socket)
@@ -26,7 +21,6 @@ namespace ClienteUI.backend
 
         public void Upload(string fullPath, string name)
         {
-            Console.WriteLine("Existe el archivo!");
             byte[] fileNameByte = Encoding.ASCII.GetBytes(name);
             byte[] fileData = File.ReadAllBytes(fullPath);
             double x = 4 + fileNameByte.Length + fileData.Length;
@@ -46,11 +40,9 @@ namespace ClienteUI.backend
         {
             byte[] len = new byte[1024 * 5000];
             socket.Receive(len);
-            Console.WriteLine("longitud " + BitConverter.ToInt32(len,0));
             byte[] clientData = new byte[BitConverter.ToInt32(len,0)];
             decimal bytesReceived;
             bytesReceived = socket.Receive(clientData);
-            Console.WriteLine("clientData " + BitConverter.ToInt32(clientData, 0));
             int fileNameLen = BitConverter.ToInt32(clientData, 0);
             string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
             BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(path + @"\" + fileName));

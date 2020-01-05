@@ -52,7 +52,7 @@ namespace ClienteUI
         {
             bool check = false;
             string extension = "";
-            Console.WriteLine("fileName "+fileName);
+           //Console.WriteLine("fileName "+fileName);
             foreach(char d in fileName)
             {
                 if (d == '.')
@@ -60,7 +60,7 @@ namespace ClienteUI
                 if (check)
                     extension += d;
             }
-            Console.WriteLine("extension " + extension);
+           // Console.WriteLine("extension " + extension);
             form = new RenameForm(extension,fileName,ftp,false);
             form.ShowDialog();
             main.RefreshButtons();
@@ -70,7 +70,7 @@ namespace ClienteUI
 
         private void btnMove_Click(object sender, EventArgs e)
         {
-            MoverForm moverForm = new MoverForm(ftp, fileName);
+            MoverForm moverForm = new MoverForm(ftp, fileName,main, this);
             moverForm.Show();
         }
     }

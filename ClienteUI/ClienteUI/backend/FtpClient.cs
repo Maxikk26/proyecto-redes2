@@ -31,6 +31,7 @@ namespace ClienteUI.backend
 
         public void Disconnect()
         {
+            Send("DIS");
             client.GetStream().Close();
             client.Close();
         }
@@ -111,7 +112,6 @@ namespace ClienteUI.backend
             string response = manager.ReceivedData();
             string[] split = response.Split('!');
             response = split[0];
-            Console.WriteLine("La rspuesta esss login " + response);
             return response;
         }
 
@@ -127,7 +127,6 @@ namespace ClienteUI.backend
             string msg = "LIST-D";
             Send(msg);
             string response = ReceiveList();
-            Console.WriteLine("response: "+response);
             return response;
         }
 
@@ -142,8 +141,6 @@ namespace ClienteUI.backend
 
         public void Upload(string fullPath, string fileName,string destiny)
         {
-            Console.WriteLine("fullPath: "+fullPath);
-            Console.WriteLine("fileName: " + fileName);
             string msg = "UP";
             Send(msg);
             Thread.Sleep(500);
@@ -186,9 +183,10 @@ namespace ClienteUI.backend
             return response;
         }
 
-        public string Move(string oldPath, string fileName)
+        public string Move(string newPath, string fileName)
         {
-            Send("MOV " + oldPath + @"\" + fileName);
+            string msg = "MOV " + newPath + @"\" + fileName;
+            Send(msg);
             string response = manager.ReceivedData();
             return response;
         }

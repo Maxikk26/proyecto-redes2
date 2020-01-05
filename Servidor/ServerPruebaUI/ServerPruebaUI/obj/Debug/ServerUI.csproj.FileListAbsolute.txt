@@ -62,3 +62,8 @@ C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\Ser
 C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.exe
 C:\Users\MAXSIO-2\Desktop\temp\redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.pdb
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Forms.ModUser.resources
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\Microsoft.VisualBasic.PowerPacks.xml
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Forms.AddUser.resources
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.AdminUsers.resources
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.Forms.ModUser.resources
+C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.CopyComplete

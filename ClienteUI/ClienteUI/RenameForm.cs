@@ -32,14 +32,14 @@ namespace ClienteUI
             string name = txtName.Text;
             if (check)
             {
-                Console.WriteLine("nombre nuevo " + name);
+                //Console.WriteLine("nombre nuevo " + name);
                 ftp.Rename(name, oldName);
                 MessageBox.Show("Renamed Succesfully", "Rename", MessageBoxButtons.OK);
             }
             else
             {
                 name += extension;
-                Console.WriteLine("nombre nuevo " + name);
+                //Console.WriteLine("nombre nuevo " + name);
                 ftp.Rename(name, oldName);
                 MessageBox.Show("Renamed Succesfully", "Rename", MessageBoxButtons.OK);
                 this.Close();

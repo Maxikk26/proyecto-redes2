@@ -95,7 +95,7 @@ namespace Classes
         public void DownloadFromServer(Socket socket,string file,string currentDirectory)
         {
             fullPath = currentDirectory + @"\" + file;
-            Console.WriteLine("file-down: " + file);
+            //Console.WriteLine("file-down: " + file);
             if (File.Exists(fullPath))
             {
                 byte[] fileNameByte = Encoding.ASCII.GetBytes(file);
@@ -103,9 +103,9 @@ namespace Classes
                 byte[] fileData = File.ReadAllBytes(fullPath);
                 double x = 4 + fileNameByte.Length + fileData.Length;
                 int y = Convert.ToInt32(x);
-                Console.WriteLine("longitud " + x.ToString());
+                //Console.WriteLine("longitud " + x.ToString());
                 socket.Send(BitConverter.GetBytes(y));
-                Console.WriteLine("Enviada la longitud");
+                //Console.WriteLine("Enviada la longitud");
                 Thread.Sleep(3500);
                 byte[] clientData = new byte[y];
                 byte[] fileNameLen = BitConverter.GetBytes(fileNameByte.Length);
@@ -122,11 +122,11 @@ namespace Classes
             destiny += @"\";
             byte[] len = new byte[1024 * 5000];
             socket.Receive(len);
-            Console.WriteLine("longitud " + BitConverter.ToInt32(len,0));
+            //Console.WriteLine("longitud " + BitConverter.ToInt32(len,0));
             byte[] clientData = new byte[BitConverter.ToInt32(len, 0)];
             decimal bytesReceived;
             bytesReceived = socket.Receive(clientData);
-            Console.WriteLine("clientData " + BitConverter.ToInt32(clientData, 0));
+            //Console.WriteLine("clientData " + BitConverter.ToInt32(clientData, 0));
             int fileNameLen = BitConverter.ToInt32(clientData, 0);
             string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
             BinaryWriter bWrite = new BinaryWriter(File.OpenWrite(destiny+fileName));

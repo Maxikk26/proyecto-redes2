@@ -105,21 +105,6 @@ namespace ServerUI
             }
         }
 
-        public void takeCount(Boolean x)
-        {
-            if (x)
-            {
-                count++;
-                putText("Users connected: "+count.ToString());
-            }
-            else
-            {
-                count--;
-                putText("Users connected: " + count.ToString());
-                
-
-            }
-        }
 
         public void showError(string err,string exc)
         {

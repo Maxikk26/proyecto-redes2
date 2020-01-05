@@ -48,12 +48,9 @@ namespace Classes
           
             if (_listener != null)
             {
-                Console.WriteLine("STOPPPP");
                 b1 = false;
                 _listener.Stop();
             }
-            else
-                Console.WriteLine("NOT STOPPP");
         }
 
         private void HandleAcceptTcpClient(IAsyncResult result)
@@ -66,8 +63,7 @@ namespace Classes
                 client = _listener.EndAcceptTcpClient(result);
                 EndPoint ep = client.Client.RemoteEndPoint;
                 target.putText("Incoming Connection..." + ep.ToString());
-                target.takeCount(true);
-                connection = new ClientConnection(client, target, controlUsuarios);
+                connection = new ClientConnection(client, target, controlUsuarios,ep);
                 ThreadPool.QueueUserWorkItem(connection.HandleClient, client);
             }
             

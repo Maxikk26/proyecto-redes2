@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Cloud.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,12 +95,6 @@
     <Compile Include="RenameForm.Designer.cs">
       <DependentUpon>RenameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TreeForm.Designer.cs">
-      <DependentUpon>TreeForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FolderNameForm.resx">
       <DependentUpon>FolderNameForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,9 +126,6 @@
     <EmbeddedResource Include="RenameForm.resx">
       <DependentUpon>RenameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeForm.resx">
-      <DependentUpon>TreeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\createFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cloud.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

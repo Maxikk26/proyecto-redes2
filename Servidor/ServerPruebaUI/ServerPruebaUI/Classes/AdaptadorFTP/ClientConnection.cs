@@ -20,6 +20,7 @@ namespace Classes
         public StreamWriter _controlWriter;
         public Socket socket;
         public string _username;
+        public EndPoint ep;
 
         public string _currentDirectory = @"C:\server";
         public bool aux;
@@ -32,8 +33,9 @@ namespace Classes
         public ControlUsuarios controlUsuarios;
 
 
-        public ClientConnection(TcpClient client, Server f1, ControlUsuarios controlUsuarios)
+        public ClientConnection(TcpClient client, Server f1, ControlUsuarios controlUsuarios, EndPoint ep)
         {
+            this.ep = ep;
             target = f1;
             _controlClient = client;
             socket = _controlClient.Client;
@@ -145,8 +147,11 @@ namespace Classes
                                     Rename(arguments);
                                     break;
                                 case "MOV":
-                                response = Move(arguments);
-                                break;
+                                    response = Move(arguments);
+                                    break;
+                                case "DIS":
+                                    Disconnect();
+                                    break;
                                 default:
                                     response = "502 Command not implemented";
                                     break;
@@ -190,19 +195,27 @@ namespace Classes
 
         private string Password(string password)
         {
-            Console.WriteLine("este es mamawebo " + _username + " " + password);
-            Console.WriteLine("SSScurrennn "+_currentDirectory);
+            //Console.WriteLine("este es mamawebo " + _username + " " + password);
+            //Console.WriteLine("SSScurrennn "+_currentDirectory);
             bool check = controlUsuarios.loginUsuario(_username, password);
-            Console.WriteLine("bool check "+check);
+            //Console.WriteLine("bool check "+check);
 
             if (check)
             {
                 _currentDirectory = _currentDirectory + @"\" + _username;
-                Console.WriteLine("RRRRRcurrennn " + _currentDirectory);
+                //Console.WriteLine("RRRRRcurrennn " + _currentDirectory);
                 return "y!";
             }
             else
                 return "n!";
+        }
+
+        private void Disconnect()
+        {
+            socket.Close();
+            _controlClient.Client.Close();
+            _controlClient.Close();
+            Close();
         }
 
         private void Rename(string arguments)
@@ -224,7 +237,7 @@ namespace Classes
                 {
                     string directory = _currentDirectory + @"\" + oldName;
                     File.Move(directory, _currentDirectory + @"\" + arguments);
-                    Console.WriteLine("rename " + directory);
+                    //Console.WriteLine("rename " + directory);
                     ren = false;
                 }
             }
@@ -239,7 +252,7 @@ namespace Classes
                 {
                     string directory = _currentDirectory + @"\" + oldName;
                     Directory.Move(directory, _currentDirectory + @"\" + arguments);
-                    Console.WriteLine("rename " + directory);
+                    //Console.WriteLine("rename " + directory);
                     ren = false;
                 }
             }
@@ -254,23 +267,21 @@ namespace Classes
         private void List()
         {
             string fullPath = _currentDirectory;
-            Console.WriteLine("fullPath-list: "+fullPath);
+            //Console.WriteLine("fullPath-list: "+fullPath);
             manager.List(fullPath, socket);
         }
 
         private void ListDirectories()
         {
             string fullPath = _currentDirectory;
-            Console.WriteLine("fullPath-directories"+fullPath);
+            //Console.WriteLine("fullPath-directories"+fullPath);
             manager.ListDirectories(fullPath, socket);
         }
 
 
         private void Close()
         {
-            target.putText("User Disconnected...");
-            target.takeCount(false);
-            _controlClient.Close();
+            target.putText("User Disconnected... "+ ep.ToString());
         }
 
         private void Download(string file)
@@ -334,7 +345,7 @@ namespace Classes
                 }
             }
             _currentDirectory = aux;
-            Console.WriteLine("segunda vez: " + aux);
+            //Console.WriteLine("segunda vez: " + aux);
         }
 
         public string Move(string newPath)
@@ -343,12 +354,11 @@ namespace Classes
             {
                 string fileName = Path.GetFileName(newPath);
                 File.Move(_currentDirectory + @"\" + fileName, newPath);
-
-                return "moved succesfully!";
+                return "Moved Succesfully!";
             }
             catch (Exception e)
             {
-                return "error fatal!";
+                return "Fatal Error!";
             }
         }
 

@@ -18,6 +18,7 @@ namespace ClienteUI
         public LoginForm()
         {
             InitializeComponent();
+            txtPass.PasswordChar = '*';
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace ClienteUI
                     TextBox textBox = c as TextBox;
                     if (String.IsNullOrEmpty(textBox.Text))
                     {
-                        MessageBox.Show("Por favor ingrese datos en todas las casillas","Casilla vacia" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("All text box cant be empty","Text box empty" , MessageBoxButtons.OK, MessageBoxIcon.Error);
                         check = false;
                         break;
 
@@ -44,7 +45,7 @@ namespace ClienteUI
                 {
                     if (txtIp.Text.Length < 7)
                     {
-                        MessageBox.Show("La Direccion IP no es valida", "Direccion IP", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("IP address invalid", "IP Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     else
@@ -56,19 +57,6 @@ namespace ClienteUI
                         string pass = txtPass.Text;
                         ftpClient = new backend.FtpClient(ip,port);
                         string b1 = ftpClient.Connect(user,pass);
-                        /*    if (b1 == "y")
-                            {
-                                main = new MainForm(ftpClient, user, false);
-                                main.Show();
-                                main.FormClosed += new FormClosedEventHandler(LoginForm_FormClosed);
-                                this.Hide();
-                            }
-                            else if(b1 == "n")
-                            {
-                                MessageBox.Show("User and/or password incorrect!!!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            */
-                        Console.WriteLine("B11111111111   " + b1);
                         switch (b1)
                         {
                             case "y":
