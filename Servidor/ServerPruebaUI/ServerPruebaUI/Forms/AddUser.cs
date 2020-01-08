@@ -1,13 +1,6 @@
 ﻿using Classes;
 using ServerPruebaUI.Classes.ControlUsuarios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServerPruebaUI.Forms
@@ -46,10 +39,9 @@ namespace ServerPruebaUI.Forms
 
         }
 
-        private void btnRegistar_Click(object sender, EventArgs e)
+        private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            
-            if(controlUsuarios.crearUsuario(txtLogin.Text, txtClave.Text, txtNombre.Text, txtApellido.Text))
+            if (controlUsuarios.crearUsuario(txtLogin.Text, txtClave.Text, txtNombre.Text, txtApellido.Text))
             {
                 file.CreateFolder(txtLogin.Text, @"C:\server");
                 controlUsuarios.salvarUsuarios();
@@ -61,7 +53,6 @@ namespace ServerPruebaUI.Forms
                 dtgvUsers.Rows[n].Cells[2].Value = txtNombre.Text;
                 dtgvUsers.Rows[n].Cells[3].Value = txtApellido.Text;
             }
-            
         }
     }
 }

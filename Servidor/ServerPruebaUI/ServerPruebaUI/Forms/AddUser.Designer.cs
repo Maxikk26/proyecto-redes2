@@ -36,9 +36,7 @@
             this.txtClave = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.btnRegistrar = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.label5 = new System.Windows.Forms.Label();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -111,46 +109,22 @@
             this.txtApellido.Size = new System.Drawing.Size(163, 20);
             this.txtApellido.TabIndex = 7;
             // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.btnRegistrar});
-            this.shapeContainer1.Size = new System.Drawing.Size(372, 277);
-            this.shapeContainer1.TabIndex = 8;
-            this.shapeContainer1.TabStop = false;
-            // 
             // btnRegistrar
             // 
-            this.btnRegistrar.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnRegistrar.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
-            this.btnRegistrar.FillGradientColor = System.Drawing.Color.DodgerBlue;
-            this.btnRegistrar.Location = new System.Drawing.Point(41, 214);
+            this.btnRegistrar.Location = new System.Drawing.Point(145, 227);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.SelectionColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnRegistrar.Size = new System.Drawing.Size(267, 50);
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistar_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(128, 226);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 26);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Registrar";
-            this.label5.Click += new System.EventHandler(this.label5_Click_1);
+            this.btnRegistrar.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar.TabIndex = 8;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // AddUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 277);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtClave);
@@ -159,7 +133,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.shapeContainer1);
             this.Name = "AddUser";
             this.Text = "AddUser";
             this.ResumeLayout(false);
@@ -177,8 +150,6 @@
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellido;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape btnRegistrar;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnRegistrar;
     }
 }

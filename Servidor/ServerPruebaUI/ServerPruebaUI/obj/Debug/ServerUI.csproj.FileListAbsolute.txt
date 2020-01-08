@@ -43,7 +43,6 @@ C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\Servidor\ServerP
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.exe
 C:\Users\MAXSIO-2\Desktop\Redes\proyecto-redes2\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.pdb
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerPruebaUI.AdminUsers.resources
-C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\Microsoft.VisualBasic.PowerPacks.dll
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\bin\Debug\Microsoft.VisualBasic.PowerPacks.xml
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.csproj.CopyComplete
 C:\Users\ezequ\Documents\proyecto-redes2\Servidor\ServerPruebaUI\ServerPruebaUI\obj\Debug\ServerUI.Server.resources

@@ -1,13 +1,6 @@
 ﻿using Classes;
 using ServerPruebaUI.Classes.ControlUsuarios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServerPruebaUI.Forms
@@ -32,11 +25,17 @@ namespace ServerPruebaUI.Forms
 
         }
 
-        private void rectangleShape1_Click(object sender, EventArgs e)
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtLogin.Text))
             {
-                if (controlUsuarios.confirmarUsuario(txtLogin.Text)) {
+                if (controlUsuarios.confirmarUsuario(txtLogin.Text))
+                {
                     Usuario usuario = controlUsuarios.buscarUsuario(txtLogin.Text);
                     if (!string.IsNullOrEmpty(txtNewLogin.Text))
                     {
@@ -63,11 +62,6 @@ namespace ServerPruebaUI.Forms
                     adminUsers.cargarUsuarios();
                 }
             }
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Text;
 using System.Net.Sockets;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
 using ServerUI;
 using ServerPruebaUI.Classes.ControlUsuarios;
 

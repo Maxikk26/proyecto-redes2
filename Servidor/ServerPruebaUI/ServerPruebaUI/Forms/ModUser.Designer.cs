@@ -33,15 +33,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtNewLogin = new System.Windows.Forms.TextBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -95,40 +93,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Apellido";
             // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(398, 368);
-            this.shapeContainer1.TabIndex = 5;
-            this.shapeContainer1.TabStop = false;
-            // 
-            // rectangleShape1
-            // 
-            this.rectangleShape1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.rectangleShape1.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
-            this.rectangleShape1.Location = new System.Drawing.Point(72, 303);
-            this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.SelectionColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.rectangleShape1.Size = new System.Drawing.Size(248, 51);
-            this.rectangleShape1.Click += new System.EventHandler(this.rectangleShape1_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(152, 316);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 25);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Modificar";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
             // txtNewLogin
             // 
             this.txtNewLogin.Location = new System.Drawing.Point(157, 119);
@@ -174,24 +138,33 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "Nota: Los campos en blanco quedaran sin modificacion";
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(157, 312);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 13;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // ModUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 368);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.txtNewLogin);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.shapeContainer1);
             this.Name = "ModUser";
             this.Text = "ModUser";
             this.ResumeLayout(false);
@@ -206,14 +179,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNewLogin;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
